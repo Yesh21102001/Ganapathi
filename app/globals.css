@@ -1,0 +1,75 @@
+@import "tailwindcss";
+
+:root {
+  --background: #fbf7f1;
+  --foreground: #2a1a14;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-inter), system-ui, sans-serif;
+  --font-serif: var(--font-cormorant), Georgia, serif;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+}
+
+/* Rich text coming from Shopify (policies, pages, product descriptions). */
+.shop-prose { color: #4a362d; line-height: 1.75; }
+.shop-prose h1, .shop-prose h2, .shop-prose h3, .shop-prose h4 {
+  font-family: var(--font-serif);
+  color: #2a1a14;
+  font-weight: 600;
+  line-height: 1.25;
+  margin: 2rem 0 0.75rem;
+}
+.shop-prose h2 { font-size: 1.75rem; }
+.shop-prose h3 { font-size: 1.4rem; }
+.shop-prose p { margin: 0 0 1rem; }
+.shop-prose ul, .shop-prose ol { margin: 0 0 1rem 1.25rem; }
+.shop-prose ul { list-style: disc; }
+.shop-prose ol { list-style: decimal; }
+.shop-prose li { margin: 0.25rem 0; }
+.shop-prose li > p { margin: 0; }
+.shop-prose a { color: #7b1e2b; text-decoration: underline; }
+.shop-prose table { width: 100%; border-collapse: collapse; margin-bottom: 1rem; }
+.shop-prose td, .shop-prose th { border: 1px solid #eadfd2; padding: 0.5rem 0.75rem; text-align: left; }
+
+html { scroll-behavior: smooth; }
+:focus-visible { outline: 2px solid #7b1e2b; outline-offset: 2px; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+
+/* Dual-handle price slider (CollectionFilters) */
+.dual-range input[type="range"] {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  margin: 0;
+  background: none;
+  pointer-events: none;
+  appearance: none;
+  -webkit-appearance: none;
+}
+.dual-range input[type="range"]::-webkit-slider-thumb {
+  pointer-events: auto;
+  -webkit-appearance: none;
+  height: 18px;
+  width: 18px;
+  border-radius: 9999px;
+  background: #2a1a14;
+  cursor: pointer;
+}
+.dual-range input[type="range"]::-moz-range-thumb {
+  pointer-events: auto;
+  height: 18px;
+  width: 18px;
+  border: 0;
+  border-radius: 9999px;
+  background: #2a1a14;
+  cursor: pointer;
+}
+.dual-range input[type="range"]::-webkit-slider-runnable-track { background: transparent; }
+.dual-range input[type="range"]::-moz-range-track { background: transparent; }
