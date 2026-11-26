@@ -83,7 +83,7 @@ export default function Header({ nav }: { nav: NavItem[] }) {
           <button
             type="button"
             onClick={() => openEnquiry()}
-            className="whitespace-nowrap rounded-md bg-[#7B1E2B] px-3 py-2 text-[13px] font-semibold sm:px-4 sm:py-2.5 sm:text-sm text-white transition hover:bg-[#611722]"
+            className="hidden whitespace-nowrap rounded-md bg-[#7B1E2B] px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-[#611722] lg:inline-block"
           >
             Send Enquiry
           </button>
@@ -93,7 +93,7 @@ export default function Header({ nav }: { nav: NavItem[] }) {
             aria-expanded={open}
             aria-controls="mobile-navigation"
             onClick={() => setOpenPath(open ? null : pathname)}
-            className="ml-1 rounded-full p-2 sm:ml-2 sm:p-2.5 hover:bg-[#2A1A14]/5 lg:hidden"
+            className="rounded-full p-2.5 hover:bg-[#2A1A14]/5 lg:hidden"
           >
             {open ? <X size={21} /> : <Menu size={21} />}
           </button>
@@ -117,6 +117,16 @@ export default function Header({ nav }: { nav: NavItem[] }) {
             {item.label}
           </Link>
         ))}
+        <button
+          type="button"
+          onClick={() => {
+            setOpenPath(null);
+            openEnquiry();
+          }}
+          className="mt-3 w-full rounded-md bg-[#7B1E2B] px-4 py-3.5 text-sm font-semibold text-white transition hover:bg-[#611722]"
+        >
+          Send Enquiry
+        </button>
       </nav>
     </header>
   );
