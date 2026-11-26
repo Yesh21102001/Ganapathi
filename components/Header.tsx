@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
@@ -60,9 +61,9 @@ export default function Header({ nav }: { nav: NavItem[] }) {
       <div className="mx-auto flex h-[68px] max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
         <Link
           href="/"
-          className="whitespace-nowrap font-serif text-xl font-semibold text-[#7B1E2B] sm:text-2xl"
+          className="flex items-center gap-1 whitespace-nowrap font-serif text-xl font-semibold text-[#7B1E2B] sm:text-2xl"
         >
-          {site.name}
+          <Image src="/logo.png" alt={site.name} width={56} height={56} priority className="-my-2 -ml-2 h-14 w-14" />
         </Link>
 
         <nav aria-label="Main navigation" className="hidden items-center gap-9 lg:flex">

@@ -43,8 +43,19 @@ export const homeCollections = [
 // Local images for the "Shop by collection" cards, keyed by collection handle.
 // These take priority over the image set on the collection in Shopify.
 export const collectionImages: Record<string, string> = {
+  women: "/images/Elegant Teal Saree Portrait.png",
   men: "/images/men-collection.png",
+  kids: "/images/kids-collection.png",
+  "home-essentials": "/images/home-essentials-collection.png",
 };
+
+// The "Shop by collection" cards: only these collections, with these titles.
+export const shopByCollection = [
+  { handle: "women", title: "Women's Wear" },
+  { handle: "men", title: "Men's Wear" },
+  { handle: "kids", title: "Kids Wear" },
+  { handle: "home-essentials", title: "Home Essentials" },
+];
 
 export type NavItem = { href: string; label: string };
 

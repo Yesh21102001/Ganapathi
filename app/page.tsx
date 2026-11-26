@@ -7,7 +7,7 @@ import KidsSection from "@/components/KidsSection";
 import Reviews from "@/components/Reviews";
 import HelpBand from "@/components/HelpBand";
 import HeroCollage from "@/components/HeroCollage";
-import { collectionImages, homeCollections, priorityHandles } from "@/lib/site";
+import { collectionImages, homeCollections, priorityHandles, shopByCollection } from "@/lib/site";
 import type { ShopifyProduct } from "@/types/shopify";
 
 function Section({
@@ -107,12 +107,14 @@ export default async function Home() {
               </Link>
             </div>
             <div className="grid grid-cols-2 gap-3 sm:gap-5 lg:grid-cols-4">
-              {shopCollections.slice(0, 4).map((collection, index) => (
+              {shopByCollection.flatMap((entry, index) => {
+                const collection = shopCollections.find((c) => c.handle === entry.handle);
+                return collection ? [{ collection, title: entry.title, index }] : [];
+              }).map(({ collection, title, index }) => (
                 <CategoryCard
                   key={collection.id}
                   index={index}
-                  title={collection.title}
-                  blurb={collection.description}
+                  title={title}
                   href={`/collections/${collection.handle}`}
                   imageUrl={collectionImages[collection.handle] ?? collection.image?.url ?? null}
                 />

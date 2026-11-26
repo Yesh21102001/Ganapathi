@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { site } from "@/lib/site";
 import type { ShopifyCollection } from "@/types/shopify";
@@ -60,8 +61,8 @@ export default function Footer({ collections }: { collections: ShopifyCollection
       <div className="mx-auto max-w-7xl px-4 pb-6 pt-14 sm:px-6 lg:px-8">
         <div className="grid sm:gap-10 sm:grid-cols-2 lg:grid-cols-[1.5fr_1fr_1fr_1fr_1.2fr]">
           <div className="pb-8 sm:pb-0">
-            <Link href="/" className="font-serif text-3xl font-semibold leading-tight">
-              {site.name}
+            <Link href="/" className="flex items-center gap-1 font-serif text-3xl font-semibold leading-tight">
+              <Image src="/logo.png" alt={site.name} width={72} height={72} className="-ml-3 h-[72px] w-[72px]" />
             </Link>
             <p className="mt-5 max-w-xs text-[15px] leading-7 text-white/90">{site.tagline}.</p>
           </div>
