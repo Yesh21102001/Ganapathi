@@ -27,7 +27,7 @@ export default function Reviews() {
               aria-hidden={i >= reviews.length ? true : undefined}
               className="w-[82vw] shrink-0 pr-5 sm:w-[24rem]"
             >
-              <div className="flex h-full flex-col rounded-md border border-[#EADFD2] bg-white p-7">
+              <div className="flex h-full flex-col rounded-sm border border-[#EADFD2] bg-white p-7">
                 <div className="flex gap-0.5 text-[#C9962B]" role="img" aria-label={`${r.rating} out of 5 stars`}>
                   {Array.from({ length: 5 }).map((_, s) => (
                     <Star key={s} size={18} fill={s < r.rating ? "currentColor" : "none"} strokeWidth={1.5} />

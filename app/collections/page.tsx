@@ -31,7 +31,7 @@ export default async function CollectionsPage() {
             ))}
           </div>
         ) : (
-          <p className="rounded-md border border-dashed border-[#D9C9B6] p-12 text-center text-[#6B4F43]">
+          <p className="rounded-sm border border-dashed border-[#D9C9B6] p-12 text-center text-[#6B4F43]">
             No collections are available right now.
           </p>
         )}

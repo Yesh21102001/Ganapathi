@@ -70,7 +70,7 @@ export default async function ProductPage({ params }: Props) {
           )}
 
           <p
-            className={`mt-4 inline-flex items-center gap-2 rounded-full border px-3 py-1 text-xs font-semibold ${
+            className={`mt-4 inline-flex items-center gap-2 rounded-sm border px-3 py-1 text-xs font-semibold ${
               inStock
                 ? "border-[#2E7D5B]/30 bg-[#2E7D5B]/10 text-[#2E7D5B]"
                 : "border-[#7B1E2B]/30 bg-[#7B1E2B]/10 text-[#7B1E2B]"

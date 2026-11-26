@@ -171,7 +171,7 @@ export default function CollectionFilters({ products }: { products: ShopifyProdu
                   key={s}
                   type="button"
                   onClick={() => toggle(setSizes)(s)}
-                  className={`min-w-10 rounded-md border px-3 py-1.5 text-sm transition ${
+                  className={`min-w-10 rounded-sm border px-3 py-1.5 text-sm transition ${
                     sizes.includes(s)
                       ? "border-[#7B1E2B] bg-[#7B1E2B] text-white"
                       : "border-[#2A1A14]/25 text-[#2A1A14] hover:border-[#2A1A14]"
@@ -222,7 +222,7 @@ export default function CollectionFilters({ products }: { products: ShopifyProdu
         <button
           type="button"
           onClick={() => setDrawer(false)}
-          className="mt-6 rounded-md bg-[#7B1E2B] py-3 text-sm font-medium text-white lg:hidden"
+          className="mt-6 rounded-sm bg-[#7B1E2B] py-3 text-sm font-medium text-white lg:hidden"
         >
           Show {shown.length} {shown.length === 1 ? "product" : "products"}
         </button>
@@ -233,7 +233,7 @@ export default function CollectionFilters({ products }: { products: ShopifyProdu
           <button
             type="button"
             onClick={() => setDrawer(true)}
-            className="flex items-center gap-2 rounded-md border border-[#2A1A14]/25 px-4 py-1.5 font-medium text-[#2A1A14] lg:hidden"
+            className="flex items-center gap-2 rounded-sm border border-[#2A1A14]/25 px-4 py-1.5 font-medium text-[#2A1A14] lg:hidden"
           >
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
               <path d="M4 6h16M7 12h10M10 18h4" />
@@ -252,7 +252,7 @@ export default function CollectionFilters({ products }: { products: ShopifyProdu
             ))}
           </div>
         ) : (
-          <div className="mt-6 rounded-md border border-dashed border-[#D9C9B6] p-12 text-center text-[#6B4F43]">
+          <div className="mt-6 rounded-sm border border-dashed border-[#D9C9B6] p-12 text-center text-[#6B4F43]">
             No products match these filters.
           </div>
         )}

@@ -6,7 +6,7 @@ import { X, ZoomIn } from "lucide-react";
 import type { ShopifyImage } from "@/types/shopify";
 
 /**
- * One large rounded image with a zoom button and a thumbnail strip.
+ * One large rounded-sm image with a zoom button and a thumbnail strip.
  * Phones: thumbnails run in a row under the image (swipe the image to change it).
  * Desktop: thumbnails run in a column on the left.
  */
@@ -54,7 +54,7 @@ export default function ProductGallery({
   }, [zoom, count]);
 
   if (count === 0) {
-    return <div className="aspect-[3/4] rounded-2xl bg-[#EADBC8]" />;
+    return <div className="aspect-[3/4] rounded-sm bg-[#EADBC8]" />;
   }
 
   const alt = (img: ShopifyImage, i: number) => img.altText || `${title} – image ${i + 1}`;
@@ -72,7 +72,7 @@ export default function ProductGallery({
     <div className="flex flex-col gap-3 lg:sticky lg:top-24 lg:grid lg:grid-cols-[72px_minmax(0,1fr)] lg:items-start lg:gap-4">
       {/* Main image */}
       <div
-        className={`relative order-1 aspect-[3/4] overflow-hidden rounded-2xl bg-[#EADBC8] lg:order-2 ${
+        className={`relative order-1 aspect-[3/4] overflow-hidden rounded-sm bg-[#EADBC8] lg:order-2 ${
           count === 1 ? "lg:col-span-2" : ""
         }`}
         onTouchStart={(e) => (touchX.current = e.touches[0].clientX)}
@@ -112,7 +112,7 @@ export default function ProductGallery({
                 onMouseEnter={() => setIndex(i)}
                 aria-label={`Show image ${i + 1}`}
                 aria-current={i === index}
-                className={`relative block aspect-[3/4] w-full overflow-hidden rounded-2xl bg-[#EADBC8] transition lg:rounded-xl ${
+                className={`relative block aspect-[3/4] w-full overflow-hidden rounded-sm bg-[#EADBC8] transition lg:rounded-sm ${
                   i === index
                     ? "ring-2 ring-[#2A1A14] ring-offset-2 ring-offset-[#FBF7F1]"
                     : "opacity-80 hover:opacity-100"

@@ -25,7 +25,7 @@ export default function HelpBand() {
   return (
     <section className="bg-[#FBF7F1]">
       <div className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8 lg:py-16">
-        <div className="relative overflow-hidden rounded-md border border-[#EADFD2] bg-white px-6 py-12 text-center sm:px-12">
+        <div className="relative overflow-hidden rounded-sm border border-[#EADFD2] bg-white px-6 py-12 text-center sm:px-12">
           <div aria-hidden="true" className="absolute inset-x-0 top-0 h-1.5 bg-[#7B1E2B]" />
           <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[#7B1E2B]">
             Need help choosing?
@@ -45,8 +45,8 @@ export default function HelpBand() {
                 {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
                 className={
                   i === 0
-                    ? "inline-flex items-center gap-2 rounded-md bg-[#7B1E2B] px-6 py-3.5 text-sm font-semibold text-white transition hover:bg-[#611722]"
-                    : "inline-flex items-center gap-2 rounded-md border border-[#D9C9B6] bg-[#FBF7F1] px-6 py-3.5 text-sm font-semibold text-[#2A1A14] transition hover:bg-[#F3EADF]"
+                    ? "inline-flex items-center gap-2 rounded-sm bg-[#7B1E2B] px-6 py-3.5 text-sm font-semibold text-white transition hover:bg-[#611722]"
+                    : "inline-flex items-center gap-2 rounded-sm border border-[#D9C9B6] bg-[#FBF7F1] px-6 py-3.5 text-sm font-semibold text-[#2A1A14] transition hover:bg-[#F3EADF]"
                 }
               >
                 <Icon size={18} aria-hidden="true" />

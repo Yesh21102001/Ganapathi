@@ -84,7 +84,7 @@ export default function Header({ nav }: { nav: NavItem[] }) {
           <button
             type="button"
             onClick={() => openEnquiry()}
-            className="hidden whitespace-nowrap rounded-md bg-[#7B1E2B] px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-[#611722] lg:inline-block"
+            className="hidden whitespace-nowrap rounded-sm bg-[#7B1E2B] px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-[#611722] lg:inline-block"
           >
             Send Enquiry
           </button>
@@ -111,7 +111,7 @@ export default function Header({ nav }: { nav: NavItem[] }) {
           <Link
             key={item.href}
             href={item.href}
-            className={`block rounded-md px-3 py-3 text-sm ${
+            className={`block rounded-sm px-3 py-3 text-sm ${
               isActive(item.href) ? "bg-[#7B1E2B]/10 text-[#7B1E2B]" : "text-[#2A1A14]"
             }`}
           >
@@ -124,7 +124,7 @@ export default function Header({ nav }: { nav: NavItem[] }) {
             setOpenPath(null);
             openEnquiry();
           }}
-          className="mt-3 w-full rounded-md bg-[#7B1E2B] px-4 py-3.5 text-sm font-semibold text-white transition hover:bg-[#611722]"
+          className="mt-3 w-full rounded-sm bg-[#7B1E2B] px-4 py-3.5 text-sm font-semibold text-white transition hover:bg-[#611722]"
         >
           Send Enquiry
         </button>

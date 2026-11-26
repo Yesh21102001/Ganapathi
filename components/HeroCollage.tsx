@@ -65,7 +65,6 @@ export default function HeroCollage({
             className="inline-flex items-center gap-1.5 rounded-sm bg-[#7B1E2B] px-5 py-2.5 text-[13px] font-semibold sm:gap-2 sm:px-7 sm:py-3.5 sm:text-sm text-white transition hover:bg-[#611722]"
           >
             Explore Collections
-            <span aria-hidden="true">›</span>
           </Link>
         </div>
 

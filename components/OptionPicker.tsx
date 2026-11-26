@@ -32,7 +32,7 @@ export default function OptionPicker({
                 aria-checked={on}
                 disabled={out}
                 onClick={() => onSelect(v)}
-                className={`relative flex h-12 min-w-12 items-center justify-center overflow-hidden rounded-full border px-4 text-sm font-bold transition ${
+                className={`relative flex h-12 min-w-12 items-center justify-center overflow-hidden rounded-sm border px-4 text-sm font-bold transition ${
                   on
                     ? "border-[#7B1E2B] text-[#7B1E2B] ring-1 ring-[#7B1E2B]"
                     : out

@@ -127,7 +127,7 @@ export default async function Home() {
       {/* FEATURE BANNER */}
       <section className="bg-[#7B1E2B]">
         <div className="mx-auto grid max-w-7xl items-center gap-10 px-4 py-14 sm:px-6 md:grid-cols-2 lg:px-8">
-          <div className="relative aspect-[4/3] overflow-hidden rounded-md bg-[#A24B54]">
+          <div className="relative aspect-[4/3] overflow-hidden rounded-sm bg-[#A24B54]">
             <Image
               src="/images/Elegant Taupe Striped Bedroom Retreat.png"
               alt="Stacked terry towels in rust and brown tones"
@@ -149,7 +149,7 @@ export default async function Home() {
                   <Link
                     key={c.handle}
                     href={`/collections/${c.handle}`}
-                    className="rounded-full border border-[#FBF7F1]/40 px-3.5 py-1.5 text-xs text-[#FBF7F1] transition hover:bg-[#FBF7F1]/10"
+                    className="rounded-sm border border-[#FBF7F1]/40 px-3.5 py-1.5 text-xs text-[#FBF7F1] transition hover:bg-[#FBF7F1]/10"
                   >
                     {c.label}
                   </Link>
@@ -158,7 +158,7 @@ export default async function Home() {
             )}
             <Link
               href="/collections/home-essentials"
-              className="mt-8 inline-block rounded-md bg-[#FBF7F1] px-6 py-3.5 text-sm font-semibold text-[#2A1A14] transition hover:bg-white"
+              className="mt-8 inline-block rounded-sm bg-[#FBF7F1] px-6 py-3.5 text-sm font-semibold text-[#2A1A14] transition hover:bg-white"
             >
               Shop home essentials
             </Link>

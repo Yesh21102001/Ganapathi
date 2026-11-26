@@ -19,7 +19,7 @@ export default function CategoryCard({
   return (
     <Link
       href={href}
-      className="group block rounded-md border border-[#EADFD2] bg-white p-2 transition sm:p-3 hover:shadow-md"
+      className="group block rounded-sm border border-[#EADFD2] bg-white p-2 transition sm:p-3 hover:shadow-md"
     >
       <div
         className="relative aspect-square overflow-hidden rounded-sm"

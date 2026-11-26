@@ -11,7 +11,7 @@ const EnquiryContext = createContext<(product?: EnquiryProduct) => void>(() => {
 export const useEnquiry = () => useContext(EnquiryContext);
 
 const field =
-  "mt-1.5 w-full rounded-md border border-[#2A1A14]/25 bg-white px-3.5 py-2.5 text-sm text-[#2A1A14] outline-none focus:border-[#7B1E2B] focus:ring-1 focus:ring-[#7B1E2B]";
+  "mt-1.5 w-full rounded-sm border border-[#2A1A14]/25 bg-white px-3.5 py-2.5 text-sm text-[#2A1A14] outline-none focus:border-[#7B1E2B] focus:ring-1 focus:ring-[#7B1E2B]";
 
 export default function EnquiryProvider({ children }: { children: React.ReactNode }) {
   const dialogRef = useRef<HTMLDialogElement>(null);
@@ -74,7 +74,7 @@ export default function EnquiryProvider({ children }: { children: React.ReactNod
         ref={dialogRef}
         aria-labelledby="enquiry-title"
         onClick={(e) => e.target === dialogRef.current && close()}
-        className="m-auto w-[calc(100%-2rem)] max-w-lg rounded-lg bg-[#FBF7F1] p-0 text-[#2A1A14] shadow-2xl backdrop:bg-[#2A1A14]/60"
+        className="m-auto w-[calc(100%-2rem)] max-w-lg rounded-sm bg-[#FBF7F1] p-0 text-[#2A1A14] shadow-2xl backdrop:bg-[#2A1A14]/60"
       >
         <div className="p-6 sm:p-8">
           <div className="flex items-start justify-between gap-4">
@@ -105,7 +105,7 @@ export default function EnquiryProvider({ children }: { children: React.ReactNod
               <button
                 type="button"
                 onClick={close}
-                className="mt-6 rounded-md bg-[#7B1E2B] px-6 py-3 text-sm font-semibold text-white hover:bg-[#611722]"
+                className="mt-6 rounded-sm bg-[#7B1E2B] px-6 py-3 text-sm font-semibold text-white hover:bg-[#611722]"
               >
                 Close
               </button>
@@ -113,7 +113,7 @@ export default function EnquiryProvider({ children }: { children: React.ReactNod
           ) : (
             <form key={formKey} onSubmit={onSubmit} className="mt-6 space-y-4">
               {product && (
-                <p className="rounded-md bg-[#F3EADF] px-3.5 py-2.5 text-sm">
+                <p className="rounded-sm bg-[#F3EADF] px-3.5 py-2.5 text-sm">
                   <span className="text-[#6B4F43]">About: </span>
                   {product.title}
                 </p>
@@ -156,7 +156,7 @@ export default function EnquiryProvider({ children }: { children: React.ReactNod
               <button
                 type="submit"
                 disabled={status === "sending"}
-                className="w-full rounded-md bg-[#7B1E2B] px-6 py-3.5 text-sm font-semibold text-white transition hover:bg-[#611722] disabled:opacity-60"
+                className="w-full rounded-sm bg-[#7B1E2B] px-6 py-3.5 text-sm font-semibold text-white transition hover:bg-[#611722] disabled:opacity-60"
               >
                 {status === "sending" ? "Sending..." : "Send enquiry"}
               </button>
