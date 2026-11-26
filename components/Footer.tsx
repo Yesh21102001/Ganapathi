@@ -100,7 +100,7 @@ export default function Footer({ collections }: { collections: ShopifyCollection
 
         <div className="mt-16 flex items-end justify-between gap-4 text-[15px] text-white/90">
           <div className="space-y-1">
-            <p className="text-xs leading-relaxed text-white/70 sm:text-sm">© {site.name} {new Date().getFullYear()}    Designed and developed by{" "}
+            <p className="text-xs leading-relaxed text-white/70 sm:text-sm">© {site.name} {new Date().getFullYear()}    Developed by{" "}
               <a
                 href="https://growwwtech.com/"
                 target="_blank"

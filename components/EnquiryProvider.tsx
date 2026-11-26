@@ -105,7 +105,7 @@ export default function EnquiryProvider({ children }: { children: React.ReactNod
               <button
                 type="button"
                 onClick={close}
-                className="mt-6 rounded-sm bg-[#7B1E2B] px-6 py-3 text-sm font-semibold text-white hover:bg-[#611722]"
+                className="mt-6 rounded-sm bg-[#7B1E2B] px-6 py-3 text-sm font-semibold text-white transition hover:-translate-y-0.5 hover:bg-[#611722] hover:shadow-md active:translate-y-0"
               >
                 Close
               </button>
@@ -156,7 +156,7 @@ export default function EnquiryProvider({ children }: { children: React.ReactNod
               <button
                 type="submit"
                 disabled={status === "sending"}
-                className="w-full rounded-sm bg-[#7B1E2B] px-6 py-3.5 text-sm font-semibold text-white transition hover:bg-[#611722] disabled:opacity-60"
+                className="w-full rounded-sm bg-[#7B1E2B] px-6 py-3.5 text-sm font-semibold text-white transition hover:-translate-y-0.5 hover:bg-[#611722] hover:shadow-md active:translate-y-0 disabled:pointer-events-none disabled:opacity-60"
               >
                 {status === "sending" ? "Sending..." : "Send enquiry"}
               </button>

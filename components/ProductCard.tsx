@@ -36,7 +36,7 @@ export default function ProductCard({ product }: { product: ShopifyProduct }) {
         </p>
       )}
       <h3 className={`line-clamp-2 text-sm text-[#2A1A14] ${product.productType ? "mt-1" : "mt-3"}`}>
-        <Link href={href} className="hover:underline">
+        <Link href={href} className="transition-colors group-hover:text-[#7B1E2B] hover:underline">
           {product.title}
         </Link>
       </h3>

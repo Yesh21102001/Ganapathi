@@ -11,7 +11,7 @@ export default function Error({ reset }: { error: Error; reset: () => void }) {
       <button
         type="button"
         onClick={reset}
-        className="mt-8 rounded-sm bg-[#7B1E2B] px-6 py-3.5 font-semibold text-white transition hover:bg-[#611722]"
+        className="mt-8 rounded-sm bg-[#7B1E2B] px-6 py-3.5 font-semibold text-white transition hover:-translate-y-0.5 hover:bg-[#611722] hover:shadow-md active:translate-y-0"
       >
         Try again
       </button>

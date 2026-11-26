@@ -45,7 +45,7 @@ export default function HelpBand() {
                 {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
                 className={
                   i === 0
-                    ? "inline-flex items-center gap-2 rounded-sm bg-[#7B1E2B] px-6 py-3.5 text-sm font-semibold text-white transition hover:bg-[#611722]"
+                    ? "inline-flex items-center gap-2 rounded-sm bg-[#7B1E2B] px-6 py-3.5 text-sm font-semibold text-white transition hover:-translate-y-0.5 hover:bg-[#611722] hover:shadow-md active:translate-y-0"
                     : "inline-flex items-center gap-2 rounded-sm border border-[#D9C9B6] bg-[#FBF7F1] px-6 py-3.5 text-sm font-semibold text-[#2A1A14] transition hover:bg-[#F3EADF]"
                 }
               >

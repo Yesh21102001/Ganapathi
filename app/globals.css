@@ -41,3 +41,8 @@ body {
 html { scroll-behavior: smooth; scroll-padding-top: 68px; } /* 68px = sticky header height, so navigations land with the page top visible */
 :focus-visible { outline: 2px solid #7b1e2b; outline-offset: 2px; }
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+
+/* Respect users who prefer less motion: hover lifts and zooms become instant. */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { transition-duration: 0.01ms !important; }
+}

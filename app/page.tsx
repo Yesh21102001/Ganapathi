@@ -158,7 +158,7 @@ export default async function Home() {
             )}
             <Link
               href="/collections/home-essentials"
-              className="mt-8 inline-block rounded-sm bg-[#FBF7F1] px-6 py-3.5 text-sm font-semibold text-[#2A1A14] transition hover:bg-white"
+              className="mt-8 inline-block rounded-sm bg-[#FBF7F1] px-6 py-3.5 text-sm font-semibold text-[#2A1A14] transition hover:-translate-y-0.5 hover:bg-white hover:shadow-md"
             >
               Shop home essentials
             </Link>

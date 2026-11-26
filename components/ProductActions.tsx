@@ -58,7 +58,7 @@ export default function ProductActions({
         <button
           type="button"
           onClick={enquire}
-          className="flex items-center justify-center gap-2.5 rounded-sm bg-[#7B1E2B] px-6 py-4 text-sm font-bold uppercase tracking-wide text-white transition hover:bg-[#611722]"
+          className="flex items-center justify-center gap-2.5 rounded-sm bg-[#7B1E2B] px-6 py-4 text-sm font-bold uppercase tracking-wide text-white transition hover:-translate-y-0.5 hover:bg-[#611722] hover:shadow-md active:translate-y-0"
         >
           <WhatsAppIcon className="h-5 w-5" />
           Enquire on WhatsApp

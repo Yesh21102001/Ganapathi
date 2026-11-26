@@ -84,7 +84,7 @@ export default function Header({ nav }: { nav: NavItem[] }) {
           <button
             type="button"
             onClick={() => openEnquiry()}
-            className="hidden whitespace-nowrap rounded-sm bg-[#7B1E2B] px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-[#611722] lg:inline-block"
+            className="hidden whitespace-nowrap rounded-sm bg-[#7B1E2B] px-4 py-2.5 text-sm font-semibold text-white transition hover:-translate-y-0.5 hover:bg-[#611722] hover:shadow-md active:translate-y-0 lg:inline-block"
           >
             Send Enquiry
           </button>
@@ -124,7 +124,7 @@ export default function Header({ nav }: { nav: NavItem[] }) {
             setOpenPath(null);
             openEnquiry();
           }}
-          className="mt-3 w-full rounded-sm bg-[#7B1E2B] px-4 py-3.5 text-sm font-semibold text-white transition hover:bg-[#611722]"
+          className="mt-3 w-full rounded-sm bg-[#7B1E2B] px-4 py-3.5 text-sm font-semibold text-white transition hover:-translate-y-0.5 hover:bg-[#611722] hover:shadow-md active:translate-y-0"
         >
           Send Enquiry
         </button>

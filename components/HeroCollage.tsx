@@ -17,7 +17,7 @@ function Tile({
   children?: React.ReactNode;
 }) {
   return (
-    <div className={`relative overflow-hidden rounded-sm ${className}`} style={{ backgroundColor: bg }}>
+    <div className={`group relative overflow-hidden rounded-sm ${className}`} style={{ backgroundColor: bg }}>
       {img && (
         <Image
           src={img.src}
@@ -25,7 +25,7 @@ function Tile({
           fill
           priority={priority}
           sizes="(min-width: 1024px) 20vw, 33vw"
-          className="object-cover object-top"
+          className="object-cover object-top transition duration-500 group-hover:scale-105"
         />
       )}
       {children}
@@ -62,7 +62,7 @@ export default function HeroCollage({
         <div className="mt-6 flex justify-center">
           <Link
             href="/collections"
-            className="inline-flex items-center gap-1.5 rounded-sm bg-[#7B1E2B] px-5 py-2.5 text-[13px] font-semibold sm:gap-2 sm:px-7 sm:py-3.5 sm:text-sm text-white transition hover:bg-[#611722]"
+            className="inline-flex items-center gap-1.5 rounded-sm bg-[#7B1E2B] px-5 py-2.5 text-[13px] font-semibold sm:gap-2 sm:px-7 sm:py-3.5 sm:text-sm text-white transition hover:-translate-y-0.5 hover:bg-[#611722] hover:shadow-md active:translate-y-0"
           >
             Explore Collections
           </Link>

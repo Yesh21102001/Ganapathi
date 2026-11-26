@@ -161,7 +161,7 @@ export default function AboutPage() {
           <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
             <Link
               href="/contact"
-              className="rounded-sm bg-[#FBF7F1] px-6 py-3.5 text-sm font-semibold text-[#2A1A14] transition hover:bg-white"
+              className="rounded-sm bg-[#FBF7F1] px-6 py-3.5 text-sm font-semibold text-[#2A1A14] transition hover:-translate-y-0.5 hover:bg-white hover:shadow-md"
             >
               Request a quote
             </Link>

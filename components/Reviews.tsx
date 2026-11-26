@@ -110,7 +110,7 @@ export default function Reviews() {
               key={i}
               className="w-[85%] shrink-0 snap-start sm:w-[calc((100%-1.25rem)/2)] lg:w-[calc((100%-2.5rem)/3)]"
             >
-              <figure className="flex h-full select-none flex-col rounded-sm border border-[#EADFD2] bg-white p-7">
+              <figure className="flex h-full select-none flex-col rounded-sm border border-[#EADFD2] bg-white p-7 transition duration-300 hover:-translate-y-1 hover:shadow-lg">
                 <div className="flex items-start justify-between">
                   <div className="flex gap-0.5 text-[#C9962B]" role="img" aria-label={`${r.rating} out of 5 stars`}>
                     {Array.from({ length: 5 }).map((_, s) => (
