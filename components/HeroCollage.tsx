@@ -35,7 +35,7 @@ function Tile({
 
 /**
  * Centred headline above a five-column image collage: tall outer columns, shorter inner ones,
- * and a call-to-action button centred beneath. Columns 2 and 4 are hidden on small screens.
+ * and a call-to-action button centred under the headline. Columns 2 and 4 are hidden on small screens.
  */
 export default function HeroCollage({
   title,
@@ -59,7 +59,17 @@ export default function HeroCollage({
           {title}
         </h1>
 
-        <div className="mt-8 grid h-[300px] grid-cols-3 gap-3 sm:h-[400px] md:mt-12 lg:h-[460px] lg:grid-cols-5 lg:gap-4">
+        <div className="mt-6 flex justify-center">
+          <Link
+            href="/collections"
+            className="inline-flex items-center gap-1.5 rounded-full bg-[#7B1E2B] px-5 py-2.5 text-[13px] font-semibold sm:gap-2 sm:px-7 sm:py-3.5 sm:text-sm text-white transition hover:bg-[#611722]"
+          >
+            Explore Collections
+            <span aria-hidden="true">›</span>
+          </Link>
+        </div>
+
+        <div className="mt-8 grid h-[300px] grid-cols-3 gap-3 sm:h-[400px] md:mt-10 lg:h-[460px] lg:grid-cols-5 lg:gap-4">
           {/* Column 1 */}
           <div className="flex flex-col gap-3 lg:gap-4">
             <Tile img={images.a} bg="#EADBC8" priority className="flex-[2]" />
@@ -71,7 +81,7 @@ export default function HeroCollage({
             <Tile img={images.c} bg="#C9962B" priority className="h-[88%] w-full" />
           </div>
 
-          {/* Centre: call to action */}
+          {/* Centre */}
           <div className="flex items-center">
             <Tile img={images.center} bg="#7B1E2B" priority className="h-[78%] w-full lg:h-[72%]" />
           </div>
@@ -86,16 +96,6 @@ export default function HeroCollage({
             <Tile img={images.e} bg="#E4D2BD" className="flex-[2]" />
             <Tile img={images.f} bg="#D9B98E" className="flex-1" />
           </div>
-        </div>
-
-        <div className="mt-8 flex justify-center">
-          <Link
-            href="/collections"
-            className="inline-flex items-center gap-2 rounded-full bg-[#7B1E2B] px-7 py-3.5 text-sm font-semibold text-white transition hover:bg-[#611722]"
-          >
-            Explore Collections
-            <span aria-hidden="true">›</span>
-          </Link>
         </div>
       </div>
     </section>
