@@ -131,7 +131,7 @@ export default function ProductGallery({
           role="dialog"
           aria-modal="true"
           aria-label="Zoomed product image"
-          className="fixed inset-0 z-[70] flex items-center justify-center bg-black/90 p-4"
+          className="fade-in fixed inset-0 z-[70] flex items-center justify-center bg-black/90 p-4"
           onClick={() => setZoom(false)}
         >
           <button

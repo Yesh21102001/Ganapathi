@@ -122,14 +122,14 @@ export default function CollectionFilters({ products }: { products: ShopifyProdu
     <div className="grid gap-6 lg:grid-cols-[260px_1fr] lg:gap-10">
       {drawer && (
         <div
-          className="fixed inset-0 z-40 bg-black/40 lg:hidden"
+          className="fade-in fixed inset-0 z-40 bg-black/40 lg:hidden"
           onClick={() => setDrawer(false)}
           aria-hidden="true"
         />
       )}
       <aside
         aria-label="Filters"
-        className={`fixed inset-y-0 left-0 z-50 flex w-[85%] max-w-sm flex-col overflow-y-auto bg-[#FBF7F1] px-5 pb-6 pt-5 shadow-xl transition-transform duration-300 lg:sticky lg:top-24 lg:z-auto lg:block lg:w-auto lg:max-w-none lg:translate-x-0 lg:self-start lg:overflow-visible lg:bg-transparent lg:p-0 lg:shadow-none ${
+        className={`fixed inset-y-0 left-0 z-50 flex w-[85%] max-w-sm flex-col overflow-y-auto bg-[#FBF7F1] px-5 pb-6 pt-5 shadow-xl transition-transform duration-500 lg:sticky lg:top-24 lg:z-auto lg:block lg:w-auto lg:max-w-none lg:translate-x-0 lg:self-start lg:overflow-visible lg:bg-transparent lg:p-0 lg:shadow-none ${
           drawer ? "translate-x-0" : "-translate-x-full"
         }`}
       >

@@ -102,11 +102,16 @@ export default function Header({ nav }: { nav: NavItem[] }) {
         </div>
       </div>
 
+      <div
+        className={`grid bg-[#FBF7F1] transition-[grid-template-rows,opacity] duration-500 lg:hidden ${
+          open ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"
+        }`}
+      >
       <nav
         id="mobile-navigation"
         aria-label="Mobile navigation"
-        hidden={!open}
-        className="border-t border-[#2A1A14]/10 bg-[#FBF7F1] px-4 pb-4 pt-2 lg:hidden"
+        inert={!open}
+        className={`min-h-0 overflow-hidden px-4 ${open ? "border-t border-[#2A1A14]/10 pb-4 pt-2" : ""}`}
       >
         {nav.map((item) => (
           <Link
@@ -130,6 +135,7 @@ export default function Header({ nav }: { nav: NavItem[] }) {
           Send Enquiry
         </button>
       </nav>
+      </div>
     </header>
   );
 }

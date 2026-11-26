@@ -21,7 +21,7 @@ function Section({
 }) {
   if (products.length === 0) return null;
   return (
-    <section>
+    <section className="reveal">
       <div className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8 lg:py-16">
         <div className="mb-8 flex items-end justify-between gap-4">
           <h2 className="font-serif text-3xl font-medium text-[#2A1A14] sm:text-4xl">{title}</h2>
@@ -96,7 +96,7 @@ export default async function Home() {
 
       {/* COLLECTIONS, straight from Shopify */}
       {shopCollections.length > 0 && (
-        <section className="bg-[#F3EADF]">
+        <section className="reveal bg-[#F3EADF]">
           <div className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8 lg:py-16">
             <div className="mb-8 flex items-end justify-between gap-4">
               <h2 className="font-serif text-3xl font-medium text-[#2A1A14] sm:text-4xl">
@@ -127,7 +127,7 @@ export default async function Home() {
       <Section title="New arrivals" href="/collections/new-arrivals" products={newest} />
 
       {/* FEATURE BANNER */}
-      <section className="bg-[#7B1E2B]">
+      <section className="reveal bg-[#7B1E2B]">
         <div className="mx-auto grid max-w-7xl items-center gap-10 px-4 py-14 sm:px-6 md:grid-cols-2 lg:px-8">
           <div className="relative aspect-[4/3] overflow-hidden rounded-sm bg-[#A24B54]">
             <Image

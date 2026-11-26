@@ -13,7 +13,7 @@ export default function KidsSection({
   if (items.length === 0) return null;
 
   return (
-    <section className="bg-[#FBF7F1]">
+    <section className="reveal bg-[#FBF7F1]">
       <div className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8 lg:py-16">
         <h2 className="font-serif text-3xl font-medium text-[#2A1A14] sm:text-4xl">For kids</h2>
 

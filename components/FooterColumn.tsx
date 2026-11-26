@@ -32,15 +32,22 @@ export default function FooterColumn({
           <ChevronDown size={20} className={`transition-transform sm:hidden ${open ? "rotate-180" : ""}`} />
         </button>
       </h3>
-      <ul id={id} className={`${open ? "block" : "hidden"} space-y-3.5 pb-5 sm:mt-5 sm:block sm:pb-0`}>
-        {items.map((i) => (
-          <li key={i.href + i.label}>
-            <Link href={i.href} className="text-[15px] text-white/90 transition-colors hover:text-white hover:underline">
-              {i.label}
-            </Link>
-          </li>
-        ))}
-      </ul>
+      <div
+        className={`grid transition-[grid-template-rows] duration-500 sm:mt-5 sm:block ${
+          open ? "grid-rows-[1fr]" : "grid-rows-[0fr]"
+        }`}
+      >
+        <ul id={id} className="min-h-0 space-y-3.5 overflow-hidden sm:overflow-visible">
+          {items.map((i) => (
+            <li key={i.href + i.label}>
+              <Link href={i.href} className="text-[15px] text-white/90 transition-colors hover:text-white hover:underline">
+                {i.label}
+              </Link>
+            </li>
+          ))}
+          <li aria-hidden="true" className="h-1.5 sm:hidden" />
+        </ul>
+      </div>
     </div>
   );
 }

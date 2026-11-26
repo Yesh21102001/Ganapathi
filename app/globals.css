@@ -10,6 +10,9 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-inter), system-ui, sans-serif;
   --font-serif: var(--font-cormorant), Georgia, serif;
+  /* Every `transition` utility on the site eases slowly out instead of Tailwind's snappy 150ms. */
+  --default-transition-duration: 400ms;
+  --default-transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 body {
@@ -42,7 +45,40 @@ html { scroll-behavior: smooth; scroll-padding-top: 68px; } /* 68px = sticky hea
 :focus-visible { outline: 2px solid #7b1e2b; outline-offset: 2px; }
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
 
+/* ---- Smooth motion ---- */
+@keyframes fade-in { from { opacity: 0; } }
+@keyframes rise-in { from { opacity: 0; transform: translateY(14px); } }
+@keyframes pop-in { from { opacity: 0; transform: translateY(10px) scale(0.97); } }
+
+/* `backwards` (not `both`) so no lingering transform breaks sticky/fixed children. */
+.page-enter { animation: rise-in 600ms cubic-bezier(0.22, 1, 0.36, 1) backwards; }
+.fade-in { animation: fade-in 350ms ease-out; }
+
+dialog[open] { animation: pop-in 350ms cubic-bezier(0.22, 1, 0.36, 1); }
+dialog[open]::backdrop { animation: fade-in 350ms ease-out; }
+
+/* Sections glide in as they scroll into view (browsers without scroll-driven animations just show them). */
+@supports (animation-timeline: view()) {
+  .reveal {
+    animation: rise-in linear both;
+    animation-timeline: view();
+    animation-range: entry 0% entry 35%;
+  }
+}
+
+/* Native <details> accordions open and close smoothly where supported. */
+@supports (interpolate-size: allow-keywords) {
+  :root { interpolate-size: allow-keywords; }
+  details::details-content {
+    block-size: 0;
+    overflow: clip;
+    transition: block-size 450ms cubic-bezier(0.22, 1, 0.36, 1), content-visibility 450ms allow-discrete;
+  }
+  details[open]::details-content { block-size: auto; }
+}
+
 /* Respect users who prefer less motion: hover lifts and zooms become instant. */
 @media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after { transition-duration: 0.01ms !important; }
+  *, *::before, *::after { transition-duration: 0.01ms !important; animation-duration: 0.01ms !important; animation-delay: 0s !important; }
+  .reveal { animation: none; }
 }
