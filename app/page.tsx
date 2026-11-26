@@ -29,12 +29,12 @@ function Section({
             View all
           </Link>
         </div>
-        {/* Phones and tablets: swipeable slider showing 2.3 cards. Desktop: 4-up grid. */}
+        {/* Phones and tablets: swipeable slider showing 1.5 cards on phones, 3.3 on tablets. Desktop: 4-up grid. */}
         <div className="-mx-4 flex snap-x snap-mandatory gap-4 overflow-x-auto scroll-pl-4 px-4 pb-2 [scrollbar-width:none] sm:-mx-6 sm:scroll-pl-6 sm:px-6 lg:mx-0 lg:grid lg:grid-cols-4 lg:gap-x-5 lg:gap-y-8 lg:overflow-visible lg:px-0 lg:pb-0 [&::-webkit-scrollbar]:hidden">
           {products.slice(0, 8).map((product, i) => (
             <div
               key={product.id}
-              className={`w-[calc((100%-2rem)/2.3)] shrink-0 snap-start sm:w-[calc((100%-2rem)/3.3)] lg:w-auto ${
+              className={`w-[calc((100%-1rem)/1.5)] shrink-0 snap-start sm:w-[calc((100%-2rem)/3.3)] lg:w-auto ${
                 i >= 4 ? "lg:hidden" : ""
               }`}
             >

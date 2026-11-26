@@ -2,6 +2,7 @@ import Link from "next/link";
 import { site } from "@/lib/site";
 import type { ShopifyCollection } from "@/types/shopify";
 import ScrollTop from "@/components/ScrollTop";
+import FooterColumn from "@/components/FooterColumn";
 
 type IconProps = { size?: number };
 const svg = (size: number, children: React.ReactNode) => (
@@ -50,27 +51,15 @@ export default function Footer({ collections }: { collections: ShopifyCollection
   const contact = [site.phone, site.email, site.address].filter(Boolean);
 
   const heading = "font-serif text-lg text-white";
-  const link = "text-[15px] text-white/90 transition-colors hover:text-white hover:underline";
 
   const column = (title: string, items: { href: string; label: string }[]) =>
-    items.length > 0 && (
-      <div>
-        <h3 className={heading}>{title}</h3>
-        <ul className="mt-5 space-y-3.5">
-          {items.map((i) => (
-            <li key={i.href + i.label}>
-              <Link href={i.href} className={link}>{i.label}</Link>
-            </li>
-          ))}
-        </ul>
-      </div>
-    );
+    items.length > 0 && <FooterColumn title={title} items={items} />;
 
   return (
     <footer className="bg-[#46040C] text-white">
       <div className="mx-auto max-w-7xl px-4 pb-6 pt-14 sm:px-6 lg:px-8">
-        <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-[1.5fr_1fr_1fr_1fr_1.2fr]">
-          <div>
+        <div className="grid sm:gap-10 sm:grid-cols-2 lg:grid-cols-[1.5fr_1fr_1fr_1fr_1.2fr]">
+          <div className="pb-8 sm:pb-0">
             <Link href="/" className="font-serif text-3xl font-semibold leading-tight">
               {site.name}
             </Link>
@@ -82,7 +71,7 @@ export default function Footer({ collections }: { collections: ShopifyCollection
           {column("Quick Links", quick)}
 
           {(contact.length > 0 || socials.length > 0) && (
-            <div>
+            <div className="pt-8 sm:pt-0">
               <h3 className={heading}>Our store</h3>
               {contact.map((line) => (
                 <p key={line} className="mt-3 break-words text-[15px] leading-6 text-white/90 first:mt-5">
@@ -111,7 +100,7 @@ export default function Footer({ collections }: { collections: ShopifyCollection
 
         <div className="mt-16 flex items-end justify-between gap-4 text-[15px] text-white/90">
           <div className="space-y-1">
-            <p className="text-sm text-white/70">© {site.name} {new Date().getFullYear()}    Designed and developed by{" "}
+            <p className="text-xs leading-relaxed text-white/70 sm:text-sm">© {site.name} {new Date().getFullYear()}    Designed and developed by{" "}
               <a
                 href="https://growwwtech.com/"
                 target="_blank"
