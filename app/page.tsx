@@ -79,9 +79,9 @@ export default async function Home() {
           b: { src: "/images/Burnt Orange Geometric Bedding in a Sunlit Bedroom.png", alt: "Burnt orange geometric bedding" },
           c: { src: "/images/Smiling Boy in Blue and White Outfit.png", alt: "Man wearing a rust coloured shirt" },
           center: { src: "/images/Elegant Purple Saree Portrait.png", alt: "Stacked terry towels in warm tones" },
-          d: heroImage(newest[0]),
-          e: heroImage(newest[1]),
-          f: heroImage(newest[2]),
+          d: { src: "/images/Elegant Ivory-and-Gold Lehenga Portrait.png", alt: "Woman wearing an elegant purple saree" },
+          e: { src: "/images/Smiling Girl in Blue Striped Dress.png", alt: "Woman wearing an elegant purple saree" },
+          f: { src: "/images/Elegant Neutral Bedding Stack.png", alt: "Woman wearing an elegant purple saree" },
         }}
       />
 

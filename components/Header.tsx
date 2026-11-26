@@ -25,9 +25,9 @@ export default function Header({ nav }: { nav: NavItem[] }) {
       const y = Math.max(window.scrollY, 0); // iOS overscroll can go negative
       const delta = y - lastY.current;
       setScrolled(y > 10);
-      if (y < 100) setHidden(false);
+      if (y < 80) setHidden(false);
       else if (Math.abs(delta) > 6) setHidden(delta > 0);
-      if (Math.abs(delta) > 6 || y < 100) lastY.current = y;
+      if (Math.abs(delta) > 6 || y < 80) lastY.current = y;
     };
     const onScroll = () => {
       if (!frame) frame = requestAnimationFrame(update);
@@ -50,7 +50,8 @@ export default function Header({ nav }: { nav: NavItem[] }) {
 
   return (
     <header
-      onFocus={() => setFocused(true)}
+      // Only keyboard focus pins the header; a mouse/touch click leaves focus on the link and must not.
+      onFocus={(e) => setFocused(e.target.matches(":focus-visible"))}
       onBlur={() => setFocused(false)}
       className={`sticky top-0 z-50 border-b border-[#2A1A14]/10 bg-[#FBF7F1]/95 backdrop-blur transition-[transform,box-shadow] duration-300 ease-out motion-reduce:transition-none ${
         offscreen ? "-translate-y-full" : "translate-y-0"
