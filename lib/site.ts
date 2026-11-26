@@ -25,6 +25,27 @@ export const site = {
 // Everything else Shopify returns follows in its own order.
 export const priorityHandles = ["women", "men", "kids", "home-essentials"];
 
+// Shopify collections shown as chips in the Home Essentials banner, in this order.
+// `handle` is the Shopify collection handle; `label` is what the chip says.
+export const homeCollections = [
+  { label: "Bedsheets", handle: "bedsheets" },
+  { label: "Pillows & Covers", handle: "pillows-covers" },
+  { label: "Sofa Covers", handle: "sofa-covers" },
+  { label: "Diwan Set Covers", handle: "diwan-sets" },
+  { label: "Door Curtains", handle: "door-curtains" },
+  { label: "Carpets", handle: "carpets" },
+  { label: "Doormats", handle: "doormats" },
+  { label: "Bath Towels", handle: "bath-towels" },
+  { label: "Fridge Covers", handle: "fridge-covers" },
+  { label: "Dining Covers", handle: "dining-covers" },
+];
+
+// Local images for the "Shop by collection" cards, keyed by collection handle.
+// These take priority over the image set on the collection in Shopify.
+export const collectionImages: Record<string, string> = {
+  men: "/images/men-collection.png",
+};
+
 export type NavItem = { href: string; label: string };
 
 export function buildNav(collections: { handle: string; title: string }[]): NavItem[] {

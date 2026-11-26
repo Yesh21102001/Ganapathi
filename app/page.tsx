@@ -5,7 +5,7 @@ import CategoryCard from "@/components/CategoryCard";
 import ProductCard from "@/components/ProductCard";
 import KidsSection from "@/components/KidsSection";
 import Reviews from "@/components/Reviews";
-import { priorityHandles, site } from "@/lib/site";
+import { collectionImages, homeCollections, priorityHandles, site } from "@/lib/site";
 import type { ShopifyProduct } from "@/types/shopify";
 
 function Section({
@@ -48,8 +48,11 @@ export default async function Home() {
     const i = priorityHandles.indexOf(h);
     return i === -1 ? priorityHandles.length : i;
   };
-  const shopCollections = [...collections].sort((a, b) => rank(a.handle) - rank(b.handle));
-  const featured = collections.find((c) => c.image?.url) ?? null;
+  const shopCollections = collections
+    .filter((c) => priorityHandles.includes(c.handle))
+    .sort((a, b) => rank(a.handle) - rank(b.handle));
+  const shopHandles = new Set(collections.map((c) => c.handle));
+  const homeChips = homeCollections.filter((c) => shopHandles.has(c.handle));
   const nothingLoaded = collections.length === 0 && newest.length === 0;
 
   return (
@@ -139,7 +142,7 @@ export default async function Home() {
                   title={collection.title}
                   blurb={collection.description}
                   href={`/collections/${collection.handle}`}
-                  imageUrl={collection.image?.url ?? null}
+                  imageUrl={collectionImages[collection.handle] ?? collection.image?.url ?? null}
                 />
               ))}
             </div>
@@ -150,40 +153,46 @@ export default async function Home() {
       <Section title="New arrivals" href="/collections/new-arrivals" products={newest} />
 
       {/* FEATURE BANNER */}
-      {featured && (
-        <section className="bg-[#7B1E2B]">
-          <div className="mx-auto grid max-w-7xl items-center gap-10 px-4 py-14 sm:px-6 md:grid-cols-2 lg:px-8">
-            <div className="relative aspect-[4/3] overflow-hidden rounded-md bg-[#A24B54]">
-              <Image
-                src={featured.image!.url}
-                alt={featured.image!.altText || featured.title}
-                fill
-                sizes="(min-width: 768px) 50vw, 100vw"
-                className="object-cover"
-              />
-            </div>
-            <div>
-              <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[#F2D9A0]">
-                Featured collection
-              </p>
-              <h2 className="mt-3 font-serif text-3xl font-medium text-[#FBF7F1] sm:text-4xl">
-                {featured.title}
-              </h2>
-              {featured.description && (
-                <p className="mt-4 max-w-md text-[#FBF7F1]/90">{featured.description}</p>
-              )}
-              <Link
-                href={`/collections/${featured.handle}`}
-                className="mt-8 inline-block rounded-md bg-[#FBF7F1] px-6 py-3.5 text-sm font-semibold text-[#2A1A14] transition hover:bg-white"
-              >
-                Explore {featured.title}
-              </Link>
-            </div>
+      <section className="bg-[#7B1E2B]">
+        <div className="mx-auto grid max-w-7xl items-center gap-10 px-4 py-14 sm:px-6 md:grid-cols-2 lg:px-8">
+          <div className="relative aspect-[4/3] overflow-hidden rounded-md bg-[#A24B54]">
+            <Image
+              src="/images/Elegant Taupe Striped Bedroom Retreat.png"
+              alt="Stacked terry towels in rust and brown tones"
+              fill
+              sizes="(min-width: 768px) 50vw, 100vw"
+              className="object-cover"
+            />
           </div>
-        </section>
-      )}
-
-
+          <div>
+            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[#F2D9A0]">
+              Home · Textiles
+            </p>
+            <h2 className="mt-3 font-serif text-3xl font-medium text-[#FBF7F1] sm:text-4xl">
+              Home Essentials
+            </h2>
+            {homeChips.length > 0 && (
+              <div className="mt-5 flex flex-wrap gap-2">
+                {homeChips.map((c) => (
+                  <Link
+                    key={c.handle}
+                    href={`/collections/${c.handle}`}
+                    className="rounded-full border border-[#FBF7F1]/40 px-3.5 py-1.5 text-xs text-[#FBF7F1] transition hover:bg-[#FBF7F1]/10"
+                  >
+                    {c.label}
+                  </Link>
+                ))}
+              </div>
+            )}
+            <Link
+              href="/collections/home-essentials"
+              className="mt-8 inline-block rounded-md bg-[#FBF7F1] px-6 py-3.5 text-sm font-semibold text-[#2A1A14] transition hover:bg-white"
+            >
+              Shop home essentials
+            </Link>
+          </div>
+        </div>
+      </section>
 
       <Section title="Best sellers" href="/collections/best-sellers" products={bestSelling} />
 

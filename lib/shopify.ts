@@ -99,7 +99,7 @@ export async function getProducts(
 
 export async function getCollections() {
   const data = await shopifyFetch<{ collections: { nodes: ShopifyCollection[] } }>(
-    `query Collections { collections(first: 50) { nodes { ${collectionFields} } } }`
+    `query Collections { collections(first: 250) { nodes { ${collectionFields} } } }`
   );
   return data.collections.nodes;
 }
