@@ -19,7 +19,7 @@ export default function CategoryCard({
   return (
     <Link
       href={href}
-      className="group block rounded-md border border-[#EADFD2] bg-white p-3 transition hover:shadow-md"
+      className="group block rounded-md border border-[#EADFD2] bg-white p-2 transition sm:p-3 hover:shadow-md"
     >
       <div
         className="relative aspect-square overflow-hidden rounded-sm"
@@ -36,8 +36,8 @@ export default function CategoryCard({
         )}
       </div>
 
-      <div className="mt-5 flex items-center justify-between px-1">
-        <h3 className="font-serif text-2xl font-medium text-[#2A1A14]">{title}</h3>
+      <div className="mt-3 flex items-center justify-between gap-2 px-1 sm:mt-5">
+        <h3 className="font-serif text-lg font-medium leading-tight text-[#2A1A14] sm:text-2xl">{title}</h3>
         <svg
           className="h-4 w-4 shrink-0 text-[#2A1A14] transition-transform group-hover:translate-x-1"
           viewBox="0 0 24 24"

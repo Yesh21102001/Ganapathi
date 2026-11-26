@@ -5,6 +5,7 @@ import CategoryCard from "@/components/CategoryCard";
 import ProductCard from "@/components/ProductCard";
 import KidsSection from "@/components/KidsSection";
 import Reviews from "@/components/Reviews";
+import HelpBand from "@/components/HelpBand";
 import { collectionImages, homeCollections, priorityHandles, site } from "@/lib/site";
 import type { ShopifyProduct } from "@/types/shopify";
 
@@ -27,9 +28,17 @@ function Section({
             View all
           </Link>
         </div>
-        <div className="grid grid-cols-2 gap-x-4 gap-y-8 md:gap-x-5 lg:grid-cols-4">
-          {products.slice(0, 4).map((product) => (
-            <ProductCard key={product.id} product={product} />
+        {/* Phones and tablets: swipeable slider showing 2.3 cards. Desktop: 4-up grid. */}
+        <div className="-mx-4 flex snap-x snap-mandatory gap-4 overflow-x-auto scroll-pl-4 px-4 pb-2 [scrollbar-width:none] sm:-mx-6 sm:scroll-pl-6 sm:px-6 lg:mx-0 lg:grid lg:grid-cols-4 lg:gap-x-5 lg:gap-y-8 lg:overflow-visible lg:px-0 lg:pb-0 [&::-webkit-scrollbar]:hidden">
+          {products.slice(0, 8).map((product, i) => (
+            <div
+              key={product.id}
+              className={`w-[calc((100%-2rem)/2.3)] shrink-0 snap-start sm:w-[calc((100%-2rem)/3.3)] lg:w-auto ${
+                i >= 4 ? "lg:hidden" : ""
+              }`}
+            >
+              <ProductCard product={product} />
+            </div>
           ))}
         </div>
       </div>
@@ -134,7 +143,7 @@ export default async function Home() {
                 All collections
               </Link>
             </div>
-            <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
+            <div className="grid grid-cols-2 gap-3 sm:gap-5 lg:grid-cols-4">
               {shopCollections.slice(0, 4).map((collection, index) => (
                 <CategoryCard
                   key={collection.id}
@@ -197,7 +206,8 @@ export default async function Home() {
       <Section title="Best sellers" href="/collections/best-sellers" products={bestSelling} />
 
       <Reviews />
-      <KidsSection hasKidsCollection={collections.some((c) => c.handle === "kids")} />
+      <KidsSection collections={collections} />
+      <HelpBand />
       
     </>
   );

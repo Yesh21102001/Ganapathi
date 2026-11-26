@@ -19,7 +19,7 @@ export default function PageHero({
   return (
     <section className="border-b border-[#2A1A14]/10 bg-[#F3EADF]">
       <div className={`mx-auto max-w-7xl px-4 py-10 sm:px-6 md:py-14 lg:px-8 ${centered ? "text-center" : ""}`}>
-        <nav aria-label="Breadcrumb" className="text-xs text-[#6B4F43]">
+        <nav aria-label="Breadcrumb" className="text-center text-xs text-[#6B4F43]">
           <Link href="/" className="hover:underline">Home</Link>
           {crumbs.map((c) => (
             <span key={c.label}>

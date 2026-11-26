@@ -62,19 +62,25 @@ export function buildNav(collections: { handle: string; title: string }[]): NavI
   ];
 }
 
+// Shopify collections shown in the "For kids" section, in this order.
 export const kids = [
-  { key: "boys", title: "Boys", blurb: "T-shirts, jeans, ethnic wear, clothing sets" },
-  { key: "girls", title: "Girls", blurb: "Frocks, party wear, lehengas, clothing sets" },
-  { key: "infants", title: "Infants", blurb: "Infant care" },
-  { key: "toys-games", title: "Toys & games", blurb: "Activity toys" },
+  { label: "Frocks", handle: "girls-frocks" },
+  { label: "Lehengas", handle: "kids-lehengas" },
+  { label: "Shirts (Boys)", handle: "kids-shirts" },
+  { label: "Jeans (Boys)", handle: "kids-jeans" },
 ];
 
 export const kidsBrands = ["Bhavika", "Akka Chelli", "Urban Urge", "Teko Fest"];
 
 // Customer reviews shown on the home page. Shopify's Storefront API does not expose
 // reviews, so replace these placeholders with real customer quotes.
-// Set to [] to hide the section.
+// Add as many as you like; they scroll in a slider. Set to [] to hide the section.
 export const reviews = [
+  { name: "[Customer name]", location: "[City]", rating: 5, text: "[Customer review: what they bought and what they liked about it.]" },
+  { name: "[Customer name]", location: "[City]", rating: 5, text: "[Customer review: what they bought and what they liked about it.]" },
+  { name: "[Customer name]", location: "[City]", rating: 5, text: "[Customer review: what they bought and what they liked about it.]" },
+  { name: "[Customer name]", location: "[City]", rating: 5, text: "[Customer review: what they bought and what they liked about it.]" },
+  { name: "[Customer name]", location: "[City]", rating: 5, text: "[Customer review: what they bought and what they liked about it.]" },
   { name: "[Customer name]", location: "[City]", rating: 5, text: "[Customer review: what they bought and what they liked about it.]" },
   { name: "[Customer name]", location: "[City]", rating: 5, text: "[Customer review: what they bought and what they liked about it.]" },
   { name: "[Customer name]", location: "[City]", rating: 5, text: "[Customer review: what they bought and what they liked about it.]" },

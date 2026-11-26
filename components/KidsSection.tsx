@@ -1,31 +1,44 @@
 import Link from "next/link";
+import Image from "next/image";
 import { kids, kidsBrands } from "@/lib/site";
 import { placeholderColors } from "@/components/CategoryCard";
 
-export default function KidsSection({ hasKidsCollection }: { hasKidsCollection: boolean }) {
-  // Link to the Shopify "kids" collection when it exists, otherwise to the full catalogue.
-  const href = hasKidsCollection ? "/collections/kids" : "/products";
+export default function KidsSection({
+  collections,
+}: {
+  collections: { handle: string; image?: { url: string; altText: string | null } | null }[];
+}) {
+  const byHandle = new Map(collections.map((c) => [c.handle, c]));
+  const items = kids.filter((k) => byHandle.has(k.handle));
+  if (items.length === 0) return null;
 
   return (
     <section className="bg-[#FBF7F1]">
       <div className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8 lg:py-16">
         <h2 className="font-serif text-3xl font-medium text-[#2A1A14] sm:text-4xl">For kids</h2>
 
-        <ul className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-          {kids.map((k, i) => (
-            <li key={k.key}>
+        <ul className="mt-8 grid grid-cols-2 gap-3 sm:gap-5 lg:grid-cols-4">
+          {items.map((k, i) => (
+            <li key={k.handle}>
               <Link
-                href={href}
-                className="flex h-full items-center gap-5 rounded-md border border-[#EADFD2] bg-white p-3.5 transition hover:shadow-md"
+                href={`/collections/${k.handle}`}
+                className="flex h-full flex-col gap-3 rounded-md border border-[#EADFD2] bg-white p-2.5 transition hover:shadow-md sm:flex-row sm:items-center sm:gap-5 sm:p-3.5"
               >
                 <div
-                  className="h-24 w-24 shrink-0 rounded-sm"
+                  className="relative aspect-square w-full shrink-0 overflow-hidden rounded-sm sm:h-24 sm:w-24"
                   style={{ backgroundColor: placeholderColors[i % placeholderColors.length] }}
-                />
-                <div>
-                  <h3 className="font-serif text-2xl font-medium text-[#2A1A14]">{k.title}</h3>
-                  <p className="mt-2 text-sm leading-relaxed text-[#6B4F43]">{k.blurb}</p>
+                >
+                  {byHandle.get(k.handle)?.image?.url && (
+                    <Image
+                      src={byHandle.get(k.handle)!.image!.url}
+                      alt={k.label}
+                      fill
+                      sizes="(min-width: 640px) 96px, 50vw"
+                      className="object-cover"
+                    />
+                  )}
                 </div>
+                <h3 className="px-0.5 font-serif text-lg font-medium leading-tight text-[#2A1A14] sm:px-0 sm:text-2xl">{k.label}</h3>
               </Link>
             </li>
           ))}

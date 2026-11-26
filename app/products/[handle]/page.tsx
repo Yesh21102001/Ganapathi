@@ -50,7 +50,7 @@ export default async function ProductPage({ params }: Props) {
   return (
     <>
       <div className="mx-auto max-w-7xl px-4 pt-6 sm:px-6 lg:px-8">
-        <nav aria-label="Breadcrumb" className="text-xs text-[#6B4F43]">
+        <nav aria-label="Breadcrumb" className="text-center text-xs text-[#6B4F43]">
           <Link href="/" className="hover:underline">Home</Link>
           <span className="mx-2">/</span>
           <Link href="/products" className="hover:underline">Products</Link>
