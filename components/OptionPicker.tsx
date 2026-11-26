@@ -1,21 +1,19 @@
 "use client";
 
-import { useState } from "react";
-
 /** Round selectable option chips (size, colour…). Values in `soldOut` are struck through and disabled. */
 export default function OptionPicker({
   name,
   values,
   soldOut = [],
+  selected,
+  onSelect,
 }: {
   name: string;
   values: string[];
   soldOut?: string[];
+  selected?: string;
+  onSelect: (value: string) => void;
 }) {
-  const firstAvailable = values.find((v) => !soldOut.includes(v));
-  const [selected, setSelected] = useState<string | undefined>(
-    values.length === 1 ? firstAvailable : undefined
-  );
 
   return (
     <div className="mt-7">
@@ -34,7 +32,7 @@ export default function OptionPicker({
                 role="radio"
                 aria-checked={on}
                 disabled={out}
-                onClick={() => setSelected(v)}
+                onClick={() => onSelect(v)}
                 className={`flex h-12 min-w-12 items-center justify-center rounded-full border px-4 text-sm font-semibold transition ${
                   on
                     ? "border-[#7B1E2B] bg-[#7B1E2B] text-white"

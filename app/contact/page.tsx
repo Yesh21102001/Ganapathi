@@ -13,7 +13,7 @@ export default async function ContactPage() {
 
   const details = [
     site.address && { Icon: MapPin, label: "Visit us", value: site.address, href: undefined },
-    site.phone && { Icon: Phone, label: "Call us", value: site.phone, href: `tel:${site.phone}` },
+    site.phone && { Icon: Phone, label: "Call us", value: site.phone, href: `tel:${site.phone.replace(/\s/g, "")}` },
     site.email && { Icon: Mail, label: "Email us", value: site.email, href: `mailto:${site.email}` },
   ].filter(Boolean) as { Icon: typeof Mail; label: string; value: string; href?: string }[];
 

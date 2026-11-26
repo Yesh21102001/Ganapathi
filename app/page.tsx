@@ -72,16 +72,8 @@ export default async function Home() {
                 href="/products"
                 className="rounded-md bg-[#7B1E2B] px-6 py-3.5 font-semibold text-white transition hover:bg-[#611722]"
               >
-                Shop all products
+                Explore Products
               </Link>
-              {shopCollections[0] && (
-                <Link
-                  href={`/collections/${shopCollections[0].handle}`}
-                  className="rounded-md border border-[#2A1A14] px-6 py-3.5 font-semibold text-[#2A1A14] transition hover:bg-[#2A1A14]/5"
-                >
-                  {shopCollections[0].title}
-                </Link>
-              )}
             </div>
           </div>
 

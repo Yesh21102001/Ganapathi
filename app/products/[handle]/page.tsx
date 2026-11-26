@@ -4,8 +4,8 @@ import type { Metadata } from "next";
 import { getProductByHandle, getProducts, safe } from "@/lib/shopify";
 import { formatPrice, saleInfo } from "@/lib/format";
 import ProductGallery from "@/components/ProductGallery";
-import EnquiryButton from "@/components/EnquiryButton";
-import OptionPicker from "@/components/OptionPicker";
+import ProductActions from "@/components/ProductActions";
+import { site } from "@/lib/site";
 import ProductCard from "@/components/ProductCard";
 
 type Props = { params: Promise<{ handle: string }> };
@@ -85,37 +85,22 @@ export default async function ProductPage({ params }: Props) {
           </p>
           <p className="mt-2 text-sm font-semibold text-[#2E7D5B]">inclusive of all taxes</p>
 
-          {options.map((option) => (
-            <OptionPicker
-              key={option.name}
-              name={option.name}
-              values={option.values}
-              soldOut={
-                // With a single option, each variant title is exactly that option's value.
+          <ProductActions
+            title={product.title}
+            handle={product.handle}
+            price={formatPrice(product.priceRange.minVariantPrice)}
+            inStock={inStock}
+            whatsapp={site.whatsapp}
+            options={options.map((o) => ({
+              name: o.name,
+              values: o.values,
+              // With a single option, each variant title is exactly that option's value.
+              soldOut:
                 options.length === 1
                   ? variants.filter((v) => !v.availableForSale).map((v) => v.title)
-                  : []
-              }
-            />
-          ))}
-
-          <div className="mt-8 flex flex-wrap gap-3">
-            <EnquiryButton
-              product={{ title: product.title, handle: product.handle }}
-              className="min-w-56 flex-1 rounded-md bg-[#7B1E2B] px-8 py-4 text-sm font-bold uppercase tracking-wide text-white transition hover:bg-[#611722] sm:flex-none"
-            >
-              Enquire now
-            </EnquiryButton>
-            <Link
-              href="/products"
-              className="rounded-md border border-[#2A1A14]/25 px-8 py-4 text-center text-sm font-bold uppercase tracking-wide text-[#2A1A14] transition hover:border-[#2A1A14]"
-            >
-              Keep browsing
-            </Link>
-          </div>
-          {!inStock && (
-            <p className="mt-3 text-sm font-medium text-[#7B1E2B]">Currently out of stock</p>
-          )}
+                  : [],
+            }))}
+          />
 
           {facts.length > 0 && (
             <div className="mt-8 border-t border-[#2A1A14]/10 pt-6">

@@ -18,7 +18,7 @@ export default async function PolicyPage({ params }: Props) {
 
   return (
     <>
-      <PageHero title={policy.title} eyebrow="Store policy" crumbs={[{ label: policy.title }]} />
+      <PageHero centered title={policy.title} eyebrow="Store policy" crumbs={[{ label: policy.title }]} />
       <article className="mx-auto max-w-3xl px-4 py-12 sm:px-6 lg:py-16">
         {/* Merchant-authored HTML served by the Shopify Storefront API. */}
         <div className="shop-prose" dangerouslySetInnerHTML={{ __html: policy.body }} />

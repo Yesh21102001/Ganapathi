@@ -5,8 +5,14 @@ export const site = {
   tagline: "Clothing and home textiles for the whole family",
   offer: "", // e.g. "Free shipping above ₹999"
   address: "",
-  phone: "",
-  email: "",
+  phone: "+91 9030000088",
+  whatsapp: "919030000088", // country code + number, digits only
+  email: "ganapatiindustries23@gmail.com",
+  social: {
+    facebook: "https://www.facebook.com/ganapatiindustriesfactoryoutlet/",
+    instagram: "https://www.instagram.com/ganapatiindustriesfo",
+    youtube: "https://www.youtube.com/@ganapatiindustries5862",
+  }, // profile URLs; empty = icon hidden
   trust: {
     shipping: "[Shipping promise]",
     returns: "[Returns policy]",
@@ -28,7 +34,7 @@ export function buildNav(collections: { handle: string; title: string }[]): NavI
   };
   const sorted = [...collections].sort((a, b) => rank(a.handle) - rank(b.handle));
   return [
-    { href: "/products", label: "Shop all" },
+    { href: "/products", label: "Shop" },
     ...sorted.slice(0, 5).map((c) => ({ href: `/collections/${c.handle}`, label: c.title })),
     { href: "/about", label: "About" },
     { href: "/contact", label: "Contact" },
