@@ -6,7 +6,8 @@ import ProductCard from "@/components/ProductCard";
 import KidsSection from "@/components/KidsSection";
 import Reviews from "@/components/Reviews";
 import HelpBand from "@/components/HelpBand";
-import { collectionImages, homeCollections, priorityHandles, site } from "@/lib/site";
+import HeroCollage from "@/components/HeroCollage";
+import { collectionImages, homeCollections, priorityHandles } from "@/lib/site";
 import type { ShopifyProduct } from "@/types/shopify";
 
 function Section({
@@ -46,6 +47,10 @@ function Section({
   );
 }
 
+function heroImage(p?: ShopifyProduct) {
+  return p?.featuredImage?.url ? { src: p.featuredImage.url, alt: p.featuredImage.altText || p.title } : null;
+}
+
 export default async function Home() {
   const [collections, newest, bestSelling] = await Promise.all([
     safe(getCollections(), []),
@@ -67,60 +72,18 @@ export default async function Home() {
   return (
     <>
       {/* HERO */}
-      <section className="bg-[#FCF8F3]">
-        <div className="mx-auto grid max-w-7xl items-center gap-10 px-4 py-12 sm:px-6 md:py-16 lg:grid-cols-2 lg:gap-16 lg:px-8">
-          <div>
-            <p className="mb-5 text-xs font-semibold uppercase tracking-[0.2em] text-[#7B1E2B]">
-              {site.tagline}
-            </p>
-            <h1 className="font-serif text-4xl font-medium leading-[1.1] text-[#2A1A14] sm:text-5xl lg:text-6xl">
-              Sarees, ethnic wear and everyday essentials, all in one store
-            </h1>
-            <p className="mt-6 max-w-md text-lg leading-relaxed text-[#6B4F43]">
-              From festive sarees and lehengas to everyday shirts, kids wear and home textiles.
-            </p>
-            <div className="mt-8 flex flex-wrap gap-3">
-              <Link
-                href="/products"
-                className="rounded-md bg-[#7B1E2B] px-6 py-3.5 font-semibold text-white transition hover:bg-[#611722]"
-              >
-                Explore Products
-              </Link>
-            </div>
-          </div>
-
-          <div className="grid h-[420px] grid-cols-2 grid-rows-2 gap-3 sm:h-[520px]">
-            <div className="relative row-span-2 overflow-hidden rounded-md bg-[#EADBC8]">
-              <Image
-                src="/images/Elegant Purple Saree Portrait.png"
-                alt="Woman wearing an elegant purple saree"
-                fill
-                priority
-                sizes="(min-width: 1024px) 25vw, 50vw"
-                className="object-cover object-center"
-              />
-            </div>
-            <div className="relative overflow-hidden rounded-md bg-[#E4D2BD]">
-              <Image
-                src="/images/Rust Shirt Editorial Portrait.png"
-                alt="Man wearing a rust coloured shirt"
-                fill
-                sizes="(min-width: 1024px) 25vw, 50vw"
-                className="object-cover object-center"
-              />
-            </div>
-            <div className="relative overflow-hidden rounded-md bg-[#F0E4D4]">
-              <Image
-                src="/images/Burnt Orange Geometric Bedding in a Sunlit Bedroom.png"
-                alt="Burnt orange geometric bedding in a sunlit bedroom"
-                fill
-                sizes="(min-width: 1024px) 25vw, 50vw"
-                className="object-cover object-center"
-              />
-            </div>
-          </div>
-        </div>
-      </section>
+      <HeroCollage
+        title="Clothing and Home Textiles for the Whole Family"
+        images={{
+          a: { src: "/images/Elegant Purple Saree Portrait.png", alt: "Woman wearing an elegant purple saree" },
+          b: { src: "/images/Burnt Orange Geometric Bedding in a Sunlit Bedroom.png", alt: "Burnt orange geometric bedding" },
+          c: { src: "/images/Rust Shirt Editorial Portrait.png", alt: "Man wearing a rust coloured shirt" },
+          center: { src: "/images/home-essentials.png", alt: "Stacked terry towels in warm tones" },
+          d: heroImage(newest[0]),
+          e: heroImage(newest[1]),
+          f: heroImage(newest[2]),
+        }}
+      />
 
       {nothingLoaded && (
         <div className="mx-auto max-w-3xl px-4 py-16 text-center">
