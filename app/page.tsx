@@ -87,7 +87,7 @@ export default async function Home() {
 
       {nothingLoaded && (
         <div className="mx-auto max-w-3xl px-4 py-16 text-center">
-          <h2 className="font-serif text-3xl text-[#2A1A14]">We could not load the catalogue</h2>
+          <h2 className="font-serif text-3xl font-medium text-[#2A1A14]">We could not load the catalogue</h2>
           <p className="mt-3 text-[#6B4F43]">
             The store is not responding right now. Please try again in a moment.
           </p>
@@ -139,7 +139,7 @@ export default async function Home() {
             />
           </div>
           <div>
-            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[#F2D9A0]">
+            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[#F2D9A0]">
               Home · Textiles
             </p>
             <h2 className="mt-3 font-serif text-3xl font-medium text-[#FBF7F1] sm:text-4xl">

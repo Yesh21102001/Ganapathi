@@ -59,7 +59,7 @@ export default async function ContactPage() {
                     {Icon === WhatsAppIcon ? <WhatsAppIcon className="h-5 w-5" /> : <Icon size={20} strokeWidth={1.6} />}
                   </span>
                   <div className="min-w-0">
-                    <p className="text-xs font-semibold uppercase tracking-[0.15em] text-[#6B4F43]">{label}</p>
+                    <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[#6B4F43]">{label}</p>
                     {href ? (
                       <a
                         href={href}

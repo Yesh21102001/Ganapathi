@@ -134,7 +134,7 @@ export default function CollectionFilters({ products }: { products: ShopifyProdu
         }`}
       >
         <div className="flex items-center justify-between gap-3 lg:items-baseline">
-          <h2 className="font-serif text-3xl text-[#2A1A14]">Filters</h2>
+          <h2 className="font-serif text-3xl font-medium text-[#2A1A14]">Filters</h2>
           <div className="flex items-center gap-4">
             {dirty ? (
               <button type="button" onClick={reset} className="text-sm text-[#7B1E2B] hover:underline">
@@ -222,7 +222,7 @@ export default function CollectionFilters({ products }: { products: ShopifyProdu
         <button
           type="button"
           onClick={() => setDrawer(false)}
-          className="mt-6 rounded-sm bg-[#7B1E2B] py-3 text-sm font-medium text-white lg:hidden"
+          className="mt-6 rounded-sm bg-[#7B1E2B] px-6 py-3.5 text-sm font-semibold text-white transition hover:-translate-y-0.5 hover:bg-[#611722] hover:shadow-md active:translate-y-0 lg:hidden"
         >
           Show {shown.length} {shown.length === 1 ? "product" : "products"}
         </button>

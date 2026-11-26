@@ -16,7 +16,7 @@ export default function OptionPicker({
 }) {
   return (
     <div className="mt-6">
-      <h2 className="text-sm font-bold uppercase tracking-wide text-[#2A1A14]">
+      <h2 className="text-sm font-semibold uppercase tracking-wide text-[#2A1A14]">
         Select {name}
         {selected && <span className="ml-2 font-normal normal-case text-[#6B4F43]">· {selected}</span>}
       </h2>

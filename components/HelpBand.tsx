@@ -1,6 +1,9 @@
 import Link from "next/link";
-import { MessageCircle, Phone, Mail } from "lucide-react";
+import { Phone, Mail } from "lucide-react";
+import WhatsAppIcon from "@/components/WhatsAppIcon";
 import { site } from "@/lib/site";
+
+const WhatsApp = () => <WhatsAppIcon className="h-[18px] w-[18px]" />;
 
 export default function HelpBand() {
   const phoneDigits = site.phone.replace(/[^\d+]/g, "");
@@ -9,7 +12,7 @@ export default function HelpBand() {
       key: "wa",
       href: `https://wa.me/${site.whatsapp}`,
       label: "Chat on WhatsApp",
-      Icon: MessageCircle,
+      Icon: WhatsApp,
       external: true,
     },
     site.phone && { key: "ph", href: `tel:${phoneDigits}`, label: site.phone, Icon: Phone },
@@ -18,7 +21,7 @@ export default function HelpBand() {
     key: string;
     href: string;
     label: string;
-    Icon: typeof Phone;
+    Icon: typeof Phone | typeof WhatsApp;
     external?: boolean;
   }[];
 
@@ -49,7 +52,7 @@ export default function HelpBand() {
                     : "inline-flex items-center gap-2 rounded-sm border border-[#D9C9B6] bg-[#FBF7F1] px-6 py-3.5 text-sm font-semibold text-[#2A1A14] transition hover:bg-[#F3EADF]"
                 }
               >
-                <Icon size={18} aria-hidden="true" />
+                <Icon size={18} />
                 {label}
               </Link>
             ))}

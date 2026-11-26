@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import { kids, kidsBrands } from "@/lib/site";
+import { kids, kidsBrands, kidsImages } from "@/lib/site";
 import { placeholderColors } from "@/components/CategoryCard";
 
 export default function KidsSection({
@@ -28,13 +28,13 @@ export default function KidsSection({
                   className="relative aspect-square w-full shrink-0 overflow-hidden rounded-sm sm:h-24 sm:w-24"
                   style={{ backgroundColor: placeholderColors[i % placeholderColors.length] }}
                 >
-                  {byHandle.get(k.handle)?.image?.url && (
+                  {(kidsImages[k.handle] ?? byHandle.get(k.handle)?.image?.url) && (
                     <Image
-                      src={byHandle.get(k.handle)!.image!.url}
+                      src={(kidsImages[k.handle] ?? byHandle.get(k.handle)?.image?.url)!}
                       alt={k.label}
                       fill
                       sizes="(min-width: 640px) 96px, 50vw"
-                      className="object-cover"
+                      className="object-cover object-top"
                     />
                   )}
                 </div>
@@ -45,7 +45,7 @@ export default function KidsSection({
         </ul>
 
         <div className="mt-10 flex flex-wrap items-center gap-x-8 gap-y-3 border-t border-[#EADFD2] pt-8">
-          <span className="text-xs font-semibold uppercase tracking-[0.18em] text-[#6B4F43]">
+          <span className="text-xs font-semibold uppercase tracking-[0.2em] text-[#6B4F43]">
             Kids brands
           </span>
           {kidsBrands.map((b) => (

@@ -79,6 +79,14 @@ export const kids = [
   { label: "Jeans (Boys)", handle: "kids-jeans" },
 ];
 
+// Local images for the "For kids" tiles, keyed by collection handle (override the Shopify image).
+export const kidsImages: Record<string, string> = {
+  "girls-frocks": "/images/kids-frocks.png",
+  "kids-lehengas": "/images/kids-lehengas.png",
+  "kids-shirts": "/images/kids-shirts.png",
+  "kids-jeans": "/images/kids-jeans.png",
+};
+
 export const kidsBrands = ["Bhavika", "Akka Chelli", "Urban Urge", "Teko Fest"];
 
 // Customer reviews shown on the home page. Shopify's Storefront API does not expose

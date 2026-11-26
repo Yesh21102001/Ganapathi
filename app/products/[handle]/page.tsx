@@ -62,7 +62,7 @@ export default async function ProductPage({ params }: Props) {
         <ProductGallery images={images} title={product.title} />
 
         <div className="lg:max-w-xl">
-          <h1 className="text-2xl font-bold text-[#2A1A14] sm:text-3xl">
+          <h1 className="font-serif text-3xl font-medium text-[#2A1A14] sm:text-4xl">
             {product.vendor || product.title}
           </h1>
           {product.vendor && (
@@ -101,7 +101,7 @@ export default async function ProductPage({ params }: Props) {
           <div className="mt-8 border-t border-[#2A1A14]/10">
             {product.description && (
               <details open className="group border-b border-[#2A1A14]/10 py-5">
-                <summary className="flex cursor-pointer list-none items-center justify-between text-sm font-bold uppercase tracking-wide text-[#2A1A14] [&::-webkit-details-marker]:hidden">
+                <summary className="flex cursor-pointer list-none items-center justify-between text-sm font-semibold uppercase tracking-wide text-[#2A1A14] [&::-webkit-details-marker]:hidden">
                   Product details
                   <ChevronDown size={18} className="transition group-open:rotate-180" aria-hidden="true" />
                 </summary>
@@ -121,7 +121,7 @@ export default async function ProductPage({ params }: Props) {
 
             {facts.length > 0 && (
               <details open className="group border-b border-[#2A1A14]/10 py-5">
-                <summary className="flex cursor-pointer list-none items-center justify-between text-sm font-bold uppercase tracking-wide text-[#2A1A14] [&::-webkit-details-marker]:hidden">
+                <summary className="flex cursor-pointer list-none items-center justify-between text-sm font-semibold uppercase tracking-wide text-[#2A1A14] [&::-webkit-details-marker]:hidden">
                   Specifications
                   <ChevronDown size={18} className="transition group-open:rotate-180" aria-hidden="true" />
                 </summary>
