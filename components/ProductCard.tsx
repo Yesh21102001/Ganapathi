@@ -1,11 +1,8 @@
 import type { ShopifyProduct } from "@/types/shopify";
 import Link from "next/link";
 import Image from "next/image";
-import { formatPrice, saleInfo } from "@/lib/format";
 
 export default function ProductCard({ product }: { product: ShopifyProduct }) {
-  const price = product.priceRange.minVariantPrice;
-  const sale = saleInfo(product);
   const soldOut = product.availableForSale === false;
   const href = `/products/${product.handle}`;
 
@@ -24,13 +21,11 @@ export default function ProductCard({ product }: { product: ShopifyProduct }) {
             className="object-cover transition duration-500 group-hover:scale-105"
           />
         )}
-        {(sale || soldOut) && (
+        {soldOut && (
           <span
-            className={`absolute left-2 top-2 rounded-sm px-2.5 py-1 text-[11px] font-semibold uppercase tracking-wider ${
-              soldOut ? "bg-[#2A1A14] text-white" : "bg-[#7B1E2B] text-white"
-            }`}
+            className="absolute left-2 top-2 rounded-sm bg-[#2A1A14] px-2.5 py-1 text-[11px] font-semibold uppercase tracking-wider text-white"
           >
-            {soldOut ? "Sold out" : `${sale!.percent}% off`}
+            Sold out
           </span>
         )}
       </Link>
@@ -45,12 +40,6 @@ export default function ProductCard({ product }: { product: ShopifyProduct }) {
           {product.title}
         </Link>
       </h3>
-      <p className="mt-1.5 flex items-baseline gap-2 text-sm">
-        <span className="font-semibold text-[#7B1E2B]">{formatPrice(price)}</span>
-        {sale && (
-          <span className="text-xs text-[#6B4F43] line-through">{formatPrice(sale.compare)}</span>
-        )}
-      </p>
     </article>
   );
 }

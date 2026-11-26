@@ -73,3 +73,20 @@ html { scroll-behavior: smooth; }
 }
 .dual-range input[type="range"]::-webkit-slider-runnable-track { background: transparent; }
 .dual-range input[type="range"]::-moz-range-track { background: transparent; }
+
+/* Reviews marquee: the track holds two copies of the list, so shifting by half loops seamlessly. */
+@keyframes marquee-scroll {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+.marquee-track {
+  animation: marquee-scroll var(--marquee-duration, 40s) linear infinite;
+}
+.marquee:hover .marquee-track,
+.marquee:focus-within .marquee-track {
+  animation-play-state: paused;
+}
+@media (prefers-reduced-motion: reduce) {
+  .marquee { overflow-x: auto; }
+  .marquee-track { animation: none; }
+}

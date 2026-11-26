@@ -48,17 +48,15 @@ export const collectionImages: Record<string, string> = {
 
 export type NavItem = { href: string; label: string };
 
-export function buildNav(collections: { handle: string; title: string }[]): NavItem[] {
-  const rank = (h: string) => {
-    const i = priorityHandles.indexOf(h);
-    return i === -1 ? priorityHandles.length : i;
-  };
-  const sorted = [...collections].sort((a, b) => rank(a.handle) - rank(b.handle));
+// Header navigation, in this order. Collection links use the Shopify collection handle.
+export function buildNav(): NavItem[] {
   return [
-    { href: "/products", label: "Shop" },
-    ...sorted.slice(0, 5).map((c) => ({ href: `/collections/${c.handle}`, label: c.title })),
-    { href: "/about", label: "About" },
-    { href: "/contact", label: "Contact" },
+    { href: "/", label: "Home" },
+    { href: "/collections/new-arrivals", label: "New Arrivals" },
+    { href: "/collections/women", label: "Women" },
+    { href: "/collections/men", label: "Men" },
+    { href: "/collections/kids", label: "Kids" },
+    { href: "/collections/home-essentials", label: "Home Essentials" },
   ];
 }
 

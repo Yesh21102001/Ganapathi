@@ -4,9 +4,6 @@ import { useEffect, useMemo, useState } from "react";
 import type { ShopifyProduct } from "@/types/shopify";
 import ProductCard from "@/components/ProductCard";
 
-type SortKey = "featured" | "price-asc" | "price-desc";
-
-const price = (p: ShopifyProduct) => Number(p.priceRange.minVariantPrice.amount);
 const sizesOf = (p: ShopifyProduct) =>
   (p.options ?? []).filter((o) => o.name.toLowerCase() === "size").flatMap((o) => o.values);
 const uniq = (a: (string | undefined)[]) => [...new Set(a.filter(Boolean) as string[])].sort();
@@ -71,19 +68,10 @@ function Checks({
 }
 
 export default function CollectionFilters({ products }: { products: ShopifyProduct[] }) {
-  const prices = products.map(price);
-  const lo = prices.length ? Math.floor(Math.min(...prices)) : 0;
-  const hi = prices.length ? Math.ceil(Math.max(...prices)) : 0;
-  const currency = products[0]?.priceRange.minVariantPrice.currencyCode ?? "INR";
-  const symbol = (0).toLocaleString("en-IN", { style: "currency", currency, maximumFractionDigits: 0 }).replace(/[\d\s.,]/g, "");
-
-  const [min, setMin] = useState(lo);
-  const [max, setMax] = useState(hi);
   const [cats, setCats] = useState<string[]>([]);
   const [sizes, setSizes] = useState<string[]>([]);
   const [brands, setBrands] = useState<string[]>([]);
   const [stock, setStock] = useState<"in" | "out" | null>(null);
-  const [sort, setSort] = useState<SortKey>("featured");
   const [drawer, setDrawer] = useState(false);
 
   // Lock page scroll and allow Esc to close while the mobile drawer is open.
@@ -111,9 +99,7 @@ export default function CollectionFilters({ products }: { products: ShopifyProdu
   const toggle = (set: React.Dispatch<React.SetStateAction<string[]>>) => (v: string) =>
     set((cur) => (cur.includes(v) ? cur.filter((x) => x !== v) : [...cur, v]));
 
-  let shown = products.filter((p) => {
-    const pr = price(p);
-    if (pr < min || pr > max) return false;
+  const shown = products.filter((p) => {
     if (cats.length && !cats.includes(p.productType ?? "")) return false;
     if (sizes.length && !sizesOf(p).some((s) => sizes.includes(s))) return false;
     if (brands.length && !brands.includes(p.vendor ?? "")) return false;
@@ -121,21 +107,15 @@ export default function CollectionFilters({ products }: { products: ShopifyProdu
     if (stock === "out" && p.availableForSale !== false) return false;
     return true;
   });
-  if (sort === "price-asc") shown = [...shown].sort((a, b) => price(a) - price(b));
-  if (sort === "price-desc") shown = [...shown].sort((a, b) => price(b) - price(a));
 
-  const dirty = min !== lo || max !== hi || cats.length || sizes.length || brands.length || stock;
+  const dirty = cats.length || sizes.length || brands.length || stock;
   const reset = () => {
-    setMin(lo);
-    setMax(hi);
     setCats([]);
     setSizes([]);
     setBrands([]);
     setStock(null);
   };
 
-  const box =
-    "flex w-full items-center gap-1 rounded-md bg-[#F3EADF] px-3 py-2.5 text-sm text-[#2A1A14]";
   const inStock = products.filter((p) => p.availableForSale !== false).length;
 
   return (
@@ -171,59 +151,6 @@ export default function CollectionFilters({ products }: { products: ShopifyProdu
             </button>
           </div>
         </div>
-
-        {hi > lo && (
-          <Section title="Price">
-            <div className="dual-range relative h-5">
-              <div className="absolute left-0 right-0 top-1/2 h-0.5 -translate-y-1/2 bg-[#2A1A14]/20" />
-              <div
-                className="absolute top-1/2 h-0.5 -translate-y-1/2 bg-[#2A1A14]"
-                style={{ left: `${((min - lo) / (hi - lo)) * 100}%`, right: `${100 - ((max - lo) / (hi - lo)) * 100}%` }}
-              />
-              <input
-                type="range"
-                aria-label="Minimum price"
-                min={lo}
-                max={hi}
-                value={min}
-                onChange={(e) => setMin(Math.min(Number(e.target.value), max))}
-              />
-              <input
-                type="range"
-                aria-label="Maximum price"
-                min={lo}
-                max={hi}
-                value={max}
-                onChange={(e) => setMax(Math.max(Number(e.target.value), min))}
-              />
-            </div>
-            <div className="mt-4 flex items-center gap-3 text-sm">
-              <label className={box}>
-                {symbol}
-                <input
-                  type="number"
-                  min={lo}
-                  max={max}
-                  value={min}
-                  onChange={(e) => setMin(Math.max(lo, Math.min(Number(e.target.value) || lo, max)))}
-                  className="w-full bg-transparent text-right outline-none"
-                />
-              </label>
-              <span>To</span>
-              <label className={box}>
-                {symbol}
-                <input
-                  type="number"
-                  min={min}
-                  max={hi}
-                  value={max}
-                  onChange={(e) => setMax(Math.min(hi, Math.max(Number(e.target.value) || hi, min)))}
-                  className="w-full bg-transparent text-right outline-none"
-                />
-              </label>
-            </div>
-          </Section>
-        )}
 
         {categories.length > 0 && (
           <Section title="Category">
@@ -316,18 +243,6 @@ export default function CollectionFilters({ products }: { products: ShopifyProdu
           <p>
             {shown.length} {shown.length === 1 ? "product" : "products"}
           </p>
-          <label className="flex items-center gap-2">
-            Sort:
-            <select
-              value={sort}
-              onChange={(e) => setSort(e.target.value as SortKey)}
-              className="rounded-md border border-[#2A1A14]/25 bg-transparent px-2 py-1 text-[#2A1A14]"
-            >
-              <option value="featured">Featured</option>
-              <option value="price-asc">Price: low to high</option>
-              <option value="price-desc">Price: high to low</option>
-            </select>
-          </label>
         </div>
 
         {shown.length > 0 ? (

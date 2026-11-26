@@ -1,8 +1,8 @@
 import Link from "next/link";
+import { ChevronDown } from "lucide-react";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { getProductByHandle, getProducts, safe } from "@/lib/shopify";
-import { formatPrice, saleInfo } from "@/lib/format";
 import ProductGallery from "@/components/ProductGallery";
 import ProductActions from "@/components/ProductActions";
 import { site } from "@/lib/site";
@@ -40,7 +40,6 @@ export default async function ProductPage({ params }: Props) {
     (o) => !(o.name === "Title" && o.values.length === 1 && o.values[0] === "Default Title")
   );
   const inStock = variants.length === 0 || variants.some((v) => v.availableForSale);
-  const sale = saleInfo(product);
 
   const facts = [
     product.vendor && { label: "Brand", value: product.vendor },
@@ -59,7 +58,7 @@ export default async function ProductPage({ params }: Props) {
         </nav>
       </div>
 
-      <section className="mx-auto grid max-w-7xl gap-8 px-4 py-6 sm:px-6 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,1fr)] lg:gap-12 lg:px-8 lg:py-8">
+      <section className="mx-auto grid max-w-7xl gap-6 px-4 py-6 sm:px-6 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,1fr)] lg:items-start lg:gap-10 lg:px-8 lg:py-8">
         <ProductGallery images={images} title={product.title} />
 
         <div className="lg:max-w-xl">
@@ -67,28 +66,25 @@ export default async function ProductPage({ params }: Props) {
             {product.vendor || product.title}
           </h1>
           {product.vendor && (
-            <p className="mt-1 text-lg text-[#6B4F43] sm:text-xl">{product.title}</p>
+            <p className="mt-1 text-lg font-normal text-[#6B4F43] sm:text-xl">{product.title}</p>
           )}
 
-          <p className="mt-5 flex flex-wrap items-baseline gap-x-3 gap-y-1">
-            <span className="text-3xl font-bold text-[#2A1A14]">
-              {formatPrice(product.priceRange.minVariantPrice)}
-            </span>
-            {sale && (
-              <>
-                <span className="text-lg text-[#6B4F43]">
-                  MRP <span className="line-through">{formatPrice(sale.compare)}</span>
-                </span>
-                <span className="text-lg font-semibold text-[#C2562B]">({sale.percent}% OFF)</span>
-              </>
-            )}
+          <p
+            className={`mt-4 inline-flex items-center gap-2 rounded-full border px-3 py-1 text-xs font-semibold ${
+              inStock
+                ? "border-[#2E7D5B]/30 bg-[#2E7D5B]/10 text-[#2E7D5B]"
+                : "border-[#7B1E2B]/30 bg-[#7B1E2B]/10 text-[#7B1E2B]"
+            }`}
+          >
+            <span aria-hidden="true" className={`h-1.5 w-1.5 rounded-full ${inStock ? "bg-[#2E7D5B]" : "bg-[#7B1E2B]"}`} />
+            {inStock ? "In stock" : "Out of stock"}
           </p>
-          <p className="mt-2 text-sm font-semibold text-[#2E7D5B]">inclusive of all taxes</p>
+
+          <div className="mt-5 border-t border-[#2A1A14]/10" />
 
           <ProductActions
             title={product.title}
             handle={product.handle}
-            price={formatPrice(product.priceRange.minVariantPrice)}
             inStock={inStock}
             whatsapp={site.whatsapp}
             options={options.map((o) => ({
@@ -102,40 +98,44 @@ export default async function ProductPage({ params }: Props) {
             }))}
           />
 
-          {facts.length > 0 && (
-            <div className="mt-8 border-t border-[#2A1A14]/10 pt-6">
-              <h2 className="text-sm font-semibold uppercase tracking-wide text-[#2A1A14]">
-                Product details
-              </h2>
-              <dl className="mt-4 grid grid-cols-2 gap-4 text-sm">
-                {facts.map((f) => (
-                  <div key={f.label}>
-                    <dt className="text-xs uppercase tracking-wider text-[#6B4F43]">{f.label}</dt>
-                    <dd className="mt-1 text-[#2A1A14]">{f.value}</dd>
-                  </div>
-                ))}
-              </dl>
-            </div>
-          )}
+          <div className="mt-8 border-t border-[#2A1A14]/10">
+            {product.description && (
+              <details open className="group border-b border-[#2A1A14]/10 py-5">
+                <summary className="flex cursor-pointer list-none items-center justify-between text-sm font-bold uppercase tracking-wide text-[#2A1A14] [&::-webkit-details-marker]:hidden">
+                  Product details
+                  <ChevronDown size={18} className="transition group-open:rotate-180" aria-hidden="true" />
+                </summary>
+                {product.descriptionHtml ? (
+                  // Merchant-authored HTML served by the Shopify Storefront API.
+                  <div
+                    className="shop-prose mt-4"
+                    dangerouslySetInnerHTML={{ __html: product.descriptionHtml }}
+                  />
+                ) : (
+                  <p className="mt-4 whitespace-pre-line leading-relaxed text-[#6B4F43]">
+                    {product.description}
+                  </p>
+                )}
+              </details>
+            )}
 
-          {product.description && (
-            <div className="mt-8 border-t border-[#2A1A14]/10 pt-6">
-              <h2 className="text-sm font-semibold uppercase tracking-wide text-[#2A1A14]">
-                Description
-              </h2>
-              {product.descriptionHtml ? (
-                // Merchant-authored HTML served by the Shopify Storefront API.
-                <div
-                  className="shop-prose mt-3"
-                  dangerouslySetInnerHTML={{ __html: product.descriptionHtml }}
-                />
-              ) : (
-                <p className="mt-3 whitespace-pre-line leading-relaxed text-[#6B4F43]">
-                  {product.description}
-                </p>
-              )}
-            </div>
-          )}
+            {facts.length > 0 && (
+              <details open className="group border-b border-[#2A1A14]/10 py-5">
+                <summary className="flex cursor-pointer list-none items-center justify-between text-sm font-bold uppercase tracking-wide text-[#2A1A14] [&::-webkit-details-marker]:hidden">
+                  Specifications
+                  <ChevronDown size={18} className="transition group-open:rotate-180" aria-hidden="true" />
+                </summary>
+                <dl className="mt-4 grid grid-cols-2 gap-x-6 gap-y-4 text-sm">
+                  {facts.map((f) => (
+                    <div key={f.label} className="border-b border-[#2A1A14]/10 pb-3">
+                      <dt className="text-xs text-[#6B4F43]">{f.label}</dt>
+                      <dd className="mt-1 font-medium text-[#2A1A14]">{f.value}</dd>
+                    </div>
+                  ))}
+                </dl>
+              </details>
+            )}
+          </div>
         </div>
       </section>
 

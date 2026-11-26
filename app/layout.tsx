@@ -36,7 +36,7 @@ export default async function RootLayout({
               {site.offer}
             </div>
           )}
-          <Header nav={buildNav(collections)} />
+          <Header nav={buildNav()} />
           <main id="main">{children}</main>
           <Footer collections={collections} />
           <WhatsAppButton />
