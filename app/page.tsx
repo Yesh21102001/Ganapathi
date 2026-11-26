@@ -75,10 +75,10 @@ export default async function Home() {
       <HeroCollage
         title="Clothing and Home Textiles for the Whole Family"
         images={{
-          a: { src: "/images/Elegant Purple Saree Portrait.png", alt: "Woman wearing an elegant purple saree" },
+          a: { src: "/images/home-essentials.png", alt: "Woman wearing an elegant purple saree" },
           b: { src: "/images/Burnt Orange Geometric Bedding in a Sunlit Bedroom.png", alt: "Burnt orange geometric bedding" },
           c: { src: "/images/Rust Shirt Editorial Portrait.png", alt: "Man wearing a rust coloured shirt" },
-          center: { src: "/images/home-essentials.png", alt: "Stacked terry towels in warm tones" },
+          center: { src: "/images/Elegant Purple Saree Portrait.png", alt: "Stacked terry towels in warm tones" },
           d: heroImage(newest[0]),
           e: heroImage(newest[1]),
           f: heroImage(newest[2]),
