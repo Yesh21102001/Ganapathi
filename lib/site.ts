@@ -3,7 +3,12 @@
 export const site = {
   name: "Ganapati Vastram",
   tagline: "Clothing and home textiles for the whole family",
-  offer: "", // e.g. "Free shipping above ₹999"
+  // Announcement bar above the header; messages fade from one to the next. Empty list = hidden.
+  announcements: [
+    "Clothing & home textiles for the whole family",
+    "Sarees, kids wear, bedsheets, bath towels and more",
+    "Order or enquire on WhatsApp: +91 9030000088",
+  ],
   address: "",
   phone: "+91 9030000088",
   whatsapp: "919030000088", // country code + number, digits only

@@ -2,9 +2,11 @@ import type { Metadata } from "next";
 import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import AnnouncementBar from "@/components/AnnouncementBar";
 import { Inter, Cormorant_Garamond } from "next/font/google";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import MobileTabBar from "@/components/MobileTabBar";
+import ScrollReveal from "@/components/ScrollReveal";
 import EnquiryProvider from "@/components/EnquiryProvider";
 import { getCollections, safe } from "@/lib/shopify";
 import { buildNav, site } from "@/lib/site";
@@ -31,16 +33,13 @@ export default async function RootLayout({
     <html lang="en">
       <body className={`${inter.variable} ${cormorant.variable} pb-16 font-sans antialiased md:pb-0`}>
         <EnquiryProvider>
-          {site.offer && (
-            <div className="bg-[#2A1A14] px-4 py-2 text-center text-xs text-[#FBF7F1]">
-              {site.offer}
-            </div>
-          )}
+          <AnnouncementBar messages={site.announcements} href={`https://wa.me/${site.whatsapp}`} />
           <Header nav={buildNav()} />
           <main id="main">{children}</main>
           <Footer collections={collections} />
           <WhatsAppButton />
           <MobileTabBar />
+          <ScrollReveal />
         </EnquiryProvider>
       </body>
     </html>

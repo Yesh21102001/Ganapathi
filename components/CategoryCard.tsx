@@ -19,6 +19,7 @@ export default function CategoryCard({
   return (
     <Link
       href={href}
+      data-reveal="slide"
       className="group block rounded-sm border border-[#EADFD2] bg-white p-2 transition duration-300 sm:p-3 hover:-translate-y-0.5 hover:shadow-md"
     >
       <div

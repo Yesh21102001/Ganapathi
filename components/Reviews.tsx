@@ -66,7 +66,7 @@ export default function Reviews() {
   return (
     <section className="bg-[#F3EADF]">
       <div className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8 lg:py-20">
-        <div className="flex items-end justify-between gap-4">
+        <div data-reveal="fade" className="flex items-end justify-between gap-4">
           <div>
             <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[#7B1E2B]">Reviews</p>
             <h2 className="mt-3 font-serif text-3xl font-medium text-[#2A1A14] sm:text-4xl">
@@ -103,6 +103,7 @@ export default function Reviews() {
           onPointerUp={endDrag}
           onPointerLeave={endDrag}
           onPointerCancel={endDrag}
+          data-reveal="slide"
           className="mt-10 flex cursor-grab snap-x snap-mandatory gap-5 overflow-x-auto scroll-smooth pb-2 active:cursor-grabbing [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
         >
           {reviews.map((r, i) => (

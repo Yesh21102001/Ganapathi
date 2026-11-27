@@ -21,9 +21,9 @@ function Section({
 }) {
   if (products.length === 0) return null;
   return (
-    <section className="reveal">
+    <section>
       <div className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8 lg:py-16">
-        <div className="mb-8 flex items-end justify-between gap-4">
+        <div data-reveal="fade" className="mb-8 flex items-end justify-between gap-4">
           <h2 className="font-serif text-3xl font-medium text-[#2A1A14] sm:text-4xl">{title}</h2>
           <Link href={href} className="shrink-0 text-sm font-medium text-[#7B1E2B] hover:underline">
             View all
@@ -34,6 +34,7 @@ function Section({
           {products.slice(0, 8).map((product, i) => (
             <div
               key={product.id}
+              data-reveal="slide"
               className={`w-[calc((100%-1rem)/1.5)] shrink-0 snap-start sm:w-[calc((100%-2rem)/3.3)] lg:w-auto ${
                 i >= 4 ? "lg:hidden" : ""
               }`}
@@ -96,9 +97,9 @@ export default async function Home() {
 
       {/* COLLECTIONS, straight from Shopify */}
       {shopCollections.length > 0 && (
-        <section className="reveal bg-[#F3EADF]">
+        <section className="bg-[#F3EADF]">
           <div className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8 lg:py-16">
-            <div className="mb-8 flex items-end justify-between gap-4">
+            <div data-reveal="fade" className="mb-8 flex items-end justify-between gap-4">
               <h2 className="font-serif text-3xl font-medium text-[#2A1A14] sm:text-4xl">
                 Shop by collection
               </h2>
@@ -127,9 +128,9 @@ export default async function Home() {
       <Section title="New arrivals" href="/collections/new-arrivals" products={newest} />
 
       {/* FEATURE BANNER */}
-      <section className="reveal bg-[#7B1E2B]">
+      <section className="bg-[#7B1E2B]">
         <div className="mx-auto grid max-w-7xl items-center gap-10 px-4 py-14 sm:px-6 md:grid-cols-2 lg:px-8">
-          <div className="relative aspect-[4/3] overflow-hidden rounded-sm bg-[#A24B54]">
+          <div data-reveal="zoom" className="relative aspect-[4/3] overflow-hidden rounded-sm bg-[#A24B54]">
             <Image
               src="/images/Elegant Taupe Striped Bedroom Retreat.png"
               alt="Stacked terry towels in rust and brown tones"
@@ -138,7 +139,7 @@ export default async function Home() {
               className="object-cover"
             />
           </div>
-          <div>
+          <div data-reveal="slide">
             <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[#F2D9A0]">
               Home · Textiles
             </p>

@@ -26,9 +26,9 @@ export default function HelpBand() {
   }[];
 
   return (
-    <section className="reveal bg-[#FBF7F1]">
+    <section className="bg-[#FBF7F1]">
       <div className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8 lg:py-16">
-        <div className="relative overflow-hidden rounded-sm border border-[#EADFD2] bg-white px-6 py-12 text-center sm:px-12">
+        <div data-reveal="zoom" className="relative overflow-hidden rounded-sm border border-[#EADFD2] bg-white px-6 py-12 text-center sm:px-12">
           <div aria-hidden="true" className="absolute inset-x-0 top-0 h-1.5 bg-[#7B1E2B]" />
           <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[#7B1E2B]">
             Need help choosing?

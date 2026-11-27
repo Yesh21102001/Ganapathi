@@ -145,7 +145,7 @@ export default async function ProductPage({ params }: Props) {
             <h2 className="mb-8 font-serif text-3xl font-medium text-[#2A1A14]">You may also like</h2>
             <div className="grid grid-cols-2 gap-4 md:gap-5 lg:grid-cols-4">
               {related.map((p) => (
-                <ProductCard key={p.id} product={p} />
+                <div key={p.id} data-reveal="slide"><ProductCard product={p} /></div>
               ))}
             </div>
           </div>

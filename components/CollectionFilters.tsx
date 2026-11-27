@@ -248,7 +248,7 @@ export default function CollectionFilters({ products }: { products: ShopifyProdu
         {shown.length > 0 ? (
           <div className="mt-4 grid grid-cols-2 gap-x-4 gap-y-8 md:grid-cols-3 md:gap-x-5">
             {shown.map((p) => (
-              <ProductCard key={p.id} product={p} />
+              <div key={p.id} data-reveal="slide"><ProductCard product={p} /></div>
             ))}
           </div>
         ) : (
