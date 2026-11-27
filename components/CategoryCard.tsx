@@ -20,7 +20,7 @@ export default function CategoryCard({
     <Link
       href={href}
       data-reveal="slide"
-      className="group block rounded-sm border border-[#EADFD2] bg-white p-2 transition duration-300 sm:p-3 hover:-translate-y-0.5 hover:shadow-md"
+      className="group block rounded-sm border border-[#EADFD2] bg-white p-2 transition duration-700 sm:p-3 hover:-translate-y-0.5 hover:shadow-md"
     >
       <div
         className="relative aspect-square overflow-hidden rounded-sm"
@@ -32,7 +32,7 @@ export default function CategoryCard({
             alt={title}
             fill
             sizes="(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 100vw"
-            className="object-cover transition duration-300 group-hover:scale-105"
+            className="object-cover transition duration-[1400ms] group-hover:scale-105"
           />
         )}
       </div>

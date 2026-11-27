@@ -25,7 +25,7 @@ function Tile({
           fill
           priority={priority}
           sizes="(min-width: 1024px) 20vw, 33vw"
-          className="object-cover object-top transition duration-500 group-hover:scale-105"
+          className="object-cover object-top transition duration-[1400ms] group-hover:scale-105"
         />
       )}
       {children}
@@ -55,11 +55,11 @@ export default function HeroCollage({
   return (
     <section className="bg-[#FCF8F3]">
       <div className="mx-auto max-w-7xl px-4 pb-12 pt-10 sm:px-6 md:pt-14 lg:px-8 lg:pb-16">
-        <h1 className="mx-auto max-w-3xl text-balance text-center font-serif text-4xl font-medium leading-[1.1] text-[#2A1A14] sm:text-5xl lg:text-6xl">
+        <h1 style={{ "--hero-delay": "100ms" } as React.CSSProperties} className="hero-in mx-auto max-w-3xl text-balance text-center font-serif text-4xl font-medium leading-[1.1] text-[#2A1A14] sm:text-5xl lg:text-6xl">
           {title}
         </h1>
 
-        <div className="mt-6 flex justify-center">
+        <div style={{ "--hero-delay": "350ms" } as React.CSSProperties} className="hero-in mt-6 flex justify-center">
           <Link
             href="/collections"
             className="inline-flex items-center gap-1.5 rounded-sm bg-[#7B1E2B] px-5 py-2.5 text-[13px] font-semibold sm:gap-2 sm:px-7 sm:py-3.5 sm:text-sm text-white transition hover:-translate-y-0.5 hover:bg-[#611722] hover:shadow-md active:translate-y-0"
@@ -68,7 +68,7 @@ export default function HeroCollage({
           </Link>
         </div>
 
-        <div className="mt-8 grid h-[300px] grid-cols-3 gap-3 sm:h-[400px] md:mt-10 lg:h-[460px] lg:grid-cols-5 lg:gap-4">
+        <div style={{ "--hero-delay": "600ms" } as React.CSSProperties} className="hero-in mt-8 grid h-[300px] grid-cols-3 gap-3 sm:h-[400px] md:mt-10 lg:h-[460px] lg:grid-cols-5 lg:gap-4">
           {/* Column 1 */}
           <div className="flex flex-col gap-3 lg:gap-4">
             <Tile img={images.a} bg="#EADBC8" priority className="flex-[2]" />

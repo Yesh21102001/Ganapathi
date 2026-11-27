@@ -103,7 +103,7 @@ export default function AboutPage() {
                     alt={c.title}
                     fill
                     sizes="(min-width: 1024px) 25vw, 50vw"
-                    className="object-cover object-top transition duration-500 group-hover:scale-105"
+                    className="object-cover object-top transition duration-[1400ms] group-hover:scale-105"
                   />
                 </div>
                 <h3 className="mt-3 font-serif text-xl font-medium text-[#2A1A14]">{c.title}</h3>

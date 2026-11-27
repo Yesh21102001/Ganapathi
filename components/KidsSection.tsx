@@ -22,7 +22,7 @@ export default function KidsSection({
             <li key={k.handle} data-reveal="slide">
               <Link
                 href={`/collections/${k.handle}`}
-                className="flex h-full flex-col gap-3 rounded-sm border border-[#EADFD2] bg-white p-2.5 transition duration-300 hover:-translate-y-0.5 hover:shadow-md sm:flex-row sm:items-center sm:gap-5 sm:p-3.5"
+                className="flex h-full flex-col gap-3 rounded-sm border border-[#EADFD2] bg-white p-2.5 transition duration-700 hover:-translate-y-0.5 hover:shadow-md sm:flex-row sm:items-center sm:gap-5 sm:p-3.5"
               >
                 <div
                   className="relative aspect-square w-full shrink-0 overflow-hidden rounded-sm sm:h-24 sm:w-24"

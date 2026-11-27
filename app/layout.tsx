@@ -3,7 +3,7 @@ import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import AnnouncementBar from "@/components/AnnouncementBar";
-import { Inter, Cormorant_Garamond } from "next/font/google";
+import { Jost, Cormorant_Garamond } from "next/font/google";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import MobileTabBar from "@/components/MobileTabBar";
 import ScrollReveal from "@/components/ScrollReveal";
@@ -11,7 +11,7 @@ import EnquiryProvider from "@/components/EnquiryProvider";
 import { getCollections, safe } from "@/lib/shopify";
 import { buildNav, site } from "@/lib/site";
 
-const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
+const jost = Jost({ subsets: ["latin"], variable: "--font-jost" });
 const cormorant = Cormorant_Garamond({
   subsets: ["latin"],
   weight: ["500", "600"],
@@ -31,7 +31,7 @@ export default async function RootLayout({
 
   return (
     <html lang="en">
-      <body className={`${inter.variable} ${cormorant.variable} pb-16 font-sans antialiased md:pb-0`}>
+      <body className={`${jost.variable} ${cormorant.variable} pb-16 font-sans antialiased md:pb-0`}>
         <EnquiryProvider>
           <AnnouncementBar messages={site.announcements} href={`https://wa.me/${site.whatsapp}`} />
           <Header nav={buildNav()} />

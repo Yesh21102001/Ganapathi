@@ -54,7 +54,7 @@ export default function Header({ nav }: { nav: NavItem[] }) {
       // Only keyboard focus pins the header; a mouse/touch click leaves focus on the link and must not.
       onFocus={(e) => setFocused(e.target.matches(":focus-visible"))}
       onBlur={() => setFocused(false)}
-      className={`sticky top-0 z-50 border-b border-[#2A1A14]/10 bg-[#FBF7F1]/95 backdrop-blur transition-[transform,box-shadow] duration-300 ease-out motion-reduce:transition-none ${
+      className={`sticky top-0 z-50 border-b border-[#2A1A14]/10 bg-[#FBF7F1]/95 backdrop-blur transition-[transform,box-shadow] duration-500 ease-out motion-reduce:transition-none ${
         offscreen ? "-translate-y-full" : "translate-y-0"
       } ${scrolled ? "shadow-md shadow-[#2A1A14]/10" : ""}`}
     >

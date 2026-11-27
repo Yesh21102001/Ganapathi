@@ -1,67 +1,35 @@
 "use client";
 
-import { useState } from "react";
-
-type Status = "idle" | "sending" | "sent" | "error";
+import { site } from "@/lib/site";
+import WhatsAppIcon from "@/components/WhatsAppIcon";
 
 const field =
   "mt-1.5 w-full rounded-sm border border-[#2A1A14]/25 bg-white px-3.5 py-2.5 text-sm text-[#2A1A14] outline-none focus:border-[#7B1E2B] focus:ring-1 focus:ring-[#7B1E2B]";
 
 const interests = ["Women", "Men", "Kids", "Home Essentials", "Multiple categories"];
 
-/** Inline enquiry form; posts to the same /api/enquiry endpoint as the enquiry dialog. */
+/** Inline enquiry form; hands the details over to WhatsApp as a ready-to-send message. */
 export default function ContactForm() {
-  const [status, setStatus] = useState<Status>("idle");
-  const [error, setError] = useState("");
-
-  async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
+  function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     const form = e.currentTarget;
     const d = Object.fromEntries(new FormData(form)) as Record<string, string>;
-    // The enquiry API takes name / phone / email / message, so extra fields travel inside the message.
     const lines = [
-      d.company ? `Company: ${d.company}` : "",
+      `Hi ${site.name}, I would like to make an enquiry.`,
+      "",
+      `Name: ${d.name}`,
+      `Phone: ${d.phone}`,
+      d.email ? `Email: ${d.email}` : "",
+      d.company ? `Company / Store: ${d.company}` : "",
       d.interest ? `Interested in: ${d.interest}` : "",
       d.quantity ? `Approx. quantity: ${d.quantity}` : "",
-    ].filter(Boolean);
-    lines.push("", d.message);
+      "",
+      `Message: ${d.message}`,
+    ].filter((l, i, all) => l !== "" || (all[i - 1] !== "" && i > 0));
 
-    setStatus("sending");
-    setError("");
-    try {
-      const res = await fetch("/api/enquiry", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name: d.name, phone: d.phone, email: d.email, message: lines.join("\n") }),
-      });
-      if (!res.ok) {
-        const body = await res.json().catch(() => ({}));
-        throw new Error(body.error || "Could not send your enquiry. Please try again.");
-      }
-      setStatus("sent");
-      form.reset();
-    } catch (err) {
-      setStatus("error");
-      setError(err instanceof Error ? err.message : "Something went wrong.");
-    }
-  }
-
-  if (status === "sent") {
-    return (
-      <div className="py-10 text-center">
-        <p className="font-serif text-3xl text-[#7B1E2B]">Thank you!</p>
-        <p className="mx-auto mt-3 max-w-sm text-[#6B4F43]">
-          We have received your enquiry and will contact you soon.
-        </p>
-        <button
-          type="button"
-          onClick={() => setStatus("idle")}
-          className="mt-6 text-sm font-semibold text-[#7B1E2B] underline-offset-4 hover:underline"
-        >
-          Send another enquiry
-        </button>
-      </div>
-    );
+    const link = `https://wa.me/${site.whatsapp}?text=${encodeURIComponent(lines.join(String.fromCharCode(10)))}`;
+    window.open(link, "_blank", "noopener,noreferrer");
+    form.reset();
   }
 
   return (
@@ -110,18 +78,12 @@ export default function ContactForm() {
         />
       </label>
 
-      {status === "error" && (
-        <p role="alert" className="text-sm font-medium text-[#B42318]">
-          {error}
-        </p>
-      )}
-
       <button
         type="submit"
-        disabled={status === "sending"}
-        className="w-full rounded-sm bg-[#7B1E2B] px-6 py-3.5 text-sm font-semibold text-white transition hover:-translate-y-0.5 hover:bg-[#611722] hover:shadow-md active:translate-y-0 disabled:pointer-events-none disabled:opacity-60 sm:w-auto sm:px-10"
+        className="inline-flex w-full items-center justify-center gap-2 rounded-sm bg-[#7B1E2B] px-6 py-3.5 text-sm font-semibold text-white transition hover:-translate-y-0.5 hover:bg-[#611722] hover:shadow-md active:translate-y-0 sm:w-auto sm:px-10"
       >
-        {status === "sending" ? "Sending..." : "Send enquiry"}
+        <WhatsAppIcon className="h-[18px] w-[18px]" />
+        Send on WhatsApp
       </button>
     </form>
   );

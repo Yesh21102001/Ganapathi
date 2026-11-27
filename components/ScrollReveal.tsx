@@ -23,7 +23,7 @@ export default function ScrollReveal() {
       const parent = el.parentElement!;
       const n = groups.get(parent) ?? 0;
       groups.set(parent, n + 1);
-      el.style.setProperty("--reveal-delay", `${120 * Math.min(n, 5)}ms`);
+      el.style.setProperty("--reveal-delay", `${150 * Math.min(n, 5)}ms`);
       el.classList.add("reveal-pending");
       pending.push(el);
     }
