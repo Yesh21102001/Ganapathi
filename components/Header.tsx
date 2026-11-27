@@ -115,7 +115,7 @@ export default function Header({ nav }: { nav: NavItem[] }) {
                     <ChevronDown
                       size={14}
                       aria-hidden="true"
-                      className={`transition-transform duration-500 ${showMenu ? "rotate-180" : ""}`}
+                      className={`block shrink-0 origin-center transform-gpu transition-transform duration-300 ease-out will-change-transform ${showMenu ? "rotate-180" : ""}`}
                     />
                   )}
                 </Link>
@@ -124,8 +124,8 @@ export default function Header({ nav }: { nav: NavItem[] }) {
                   <div
                     className={`absolute inset-x-0 top-full border-b border-[#2A1A14]/10 bg-[#FBF7F1] shadow-lg shadow-[#2A1A14]/10 ${
                       showMenu
-                        ? "visible translate-y-0 opacity-100 transition-[opacity,transform] duration-500"
-                        : "pointer-events-none invisible -translate-y-2 opacity-0 transition-[opacity,transform,visibility] duration-300 [transition-delay:0s,0s,300ms]"
+                        ? "visible opacity-100 transition-opacity duration-300"
+                        : "pointer-events-none invisible opacity-0 transition-[opacity,visibility] duration-200 [transition-delay:0s,200ms]"
                     }`}
                   >
                     <div className="mx-auto grid max-w-7xl gap-x-10 gap-y-6 px-8 py-8 [grid-template-columns:repeat(auto-fit,minmax(170px,1fr))]">
@@ -265,9 +265,10 @@ function MenuColumn({
           <li key={l.href}>
             <Link
               href={l.href}
-              className={`block text-sm text-[#2A1A14] transition-[color,transform] duration-300 hover:translate-x-1 hover:text-[#7B1E2B] ${compact ? "py-1.5" : ""}`}
+              className={`group/link block text-sm text-[#2A1A14] transition-colors duration-300 hover:text-[#7B1E2B] ${compact ? "py-1.5" : ""}`}
             >
-              {l.label}
+              {/* Only the text slides; the link box stays put so the hover area never moves under the cursor. */}
+              <span className="inline-block transition-transform duration-300 group-hover/link:translate-x-1">{l.label}</span>
             </Link>
           </li>
         ))}
