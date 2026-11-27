@@ -47,7 +47,8 @@ html { scroll-behavior: smooth; scroll-padding-top: 68px; } /* 68px = sticky hea
 
 /* ---- Smooth motion ---- */
 @keyframes fade-in { from { opacity: 0; } }
-@keyframes rise-in { from { opacity: 0; transform: translateY(48px); } }
+/* Despite the name, no vertical movement: content fades in where it already is. */
+@keyframes rise-in { from { opacity: 0; } }
 @keyframes pop-in { from { opacity: 0; transform: translateY(10px) scale(0.97); } }
 
 /* `backwards` (not `both`) so no lingering transform breaks sticky/fixed children. */
