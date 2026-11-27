@@ -33,10 +33,7 @@ function Tile({
   );
 }
 
-/**
- * Centred headline above a five-column image collage: tall outer columns, shorter inner ones,
- * and a call-to-action button centred under the headline. Columns 2 and 4 are hidden on small screens.
- */
+
 export default function HeroCollage({
   title,
   images,

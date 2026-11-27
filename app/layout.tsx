@@ -3,7 +3,7 @@ import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import AnnouncementBar from "@/components/AnnouncementBar";
-import { Jost, Martel } from "next/font/google";
+import { Jost, Marcellus } from "next/font/google";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import MobileTabBar from "@/components/MobileTabBar";
 import ScrollReveal from "@/components/ScrollReveal";
@@ -12,10 +12,10 @@ import { getCollections, safe } from "@/lib/shopify";
 import { buildNav, site } from "@/lib/site";
 
 const jost = Jost({ subsets: ["latin"], variable: "--font-jost" });
-const martel = Martel({
+const marcellus = Marcellus({
   subsets: ["latin"],
-  weight: ["400", "600", "700"],
-  variable: "--font-martel",
+  weight: "400", // Marcellus ships a single weight
+  variable: "--font-marcellus",
 });
 
 
@@ -33,7 +33,7 @@ export default async function RootLayout({
 
   return (
     <html lang="en">
-      <body className={`${jost.variable} ${martel.variable} pb-16 font-sans antialiased md:pb-0`}>
+      <body className={`${jost.variable} ${marcellus.variable} pb-16 font-sans antialiased md:pb-0`}>
         <EnquiryProvider>
           <AnnouncementBar messages={site.announcements} href={`https://wa.me/${site.whatsapp}`} />
           <Header nav={buildNav(new Map(collections.map((c) => [c.handle, c.title])))} />
