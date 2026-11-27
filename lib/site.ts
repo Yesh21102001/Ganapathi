@@ -174,8 +174,6 @@ export const kidsImages: Record<string, string> = {
   "kids-jeans": "/images/kids-jeans.png",
 };
 
-export const kidsBrands = ["Bhavika", "Akka Chelli", "Urban Urge", "Teko Fest"];
-
 // Customer reviews shown on the home page. Shopify's Storefront API does not expose
 // reviews, so replace these placeholders with real customer quotes.
 // Add as many as you like; they scroll in a slider. Set to [] to hide the section.

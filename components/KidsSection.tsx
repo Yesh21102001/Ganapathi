@@ -1,7 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { ArrowRight } from "lucide-react";
-import { kids, kidsBrands, kidsImages } from "@/lib/site";
+import { kids, kidsImages } from "@/lib/site";
 import { placeholderColors } from "@/components/CategoryCard";
 
 export default function KidsSection({
@@ -52,15 +52,6 @@ export default function KidsSection({
             );
           })}
         </ul>
-
-        <div data-reveal="fade" className="mt-10 flex flex-wrap items-center gap-x-8 gap-y-3 border-t border-[#EADFD2] pt-8">
-          <span className="text-xs font-semibold uppercase tracking-[0.2em] text-[#6B4F43]">
-            Kids brands
-          </span>
-          {kidsBrands.map((b) => (
-            <span key={b} className="font-serif text-xl text-[#2A1A14]">{b}</span>
-          ))}
-        </div>
       </div>
     </section>
   );
