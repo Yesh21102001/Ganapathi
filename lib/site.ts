@@ -62,6 +62,85 @@ export const shopByCollection = [
   { handle: "home-essentials", title: "Home Essentials" },
 ];
 
+// Category tree for the Collections pages. Shopify collections are flat, so the grouping lives here.
+// A node with `children` opens a page of sub-category cards; a node without opens its products.
+// Handles are Shopify collection handles; the card title is the collection's title in Shopify.
+export type CategoryNode = { handle: string; children?: CategoryNode[] };
+const leaves = (...handles: string[]): CategoryNode[] => handles.map((handle) => ({ handle }));
+
+export const categoryTree: CategoryNode[] = [
+  {
+    handle: "women",
+    children: leaves(
+      "sarees", "lehengas", "kurta-sets", "kurtas", "dresses", "tops", "women-t-shirts", "western-wear",
+      "traditional-wear", "dupattas", "readymade-blouses", "leggings", "plazzos", "women-jeans",
+      "women-sweaters", "women-shorts", "women-nightwear", "lingerie-nightwear", "bras", "petticoats",
+      "south-indian-dress", "unstitched-dress-material", "unstitched-blouse-pieces"
+    ),
+  },
+  {
+    handle: "men",
+    children: leaves(
+      "t-shirts", "casual-shirts", "formal-shirts", "ramraj-shirts", "jeans", "casual-trousers",
+      "formal-trousers", "track-pants-joggers", "mens-shorts", "sweatshirts-sweaters", "jacketsdenim-rain",
+      "traditional-wear-1", "dhotis", "sleepwear", "vests", "briefs-trunks", "boxers", "briefs",
+      "mens-active-t-shirts", "mens-swimwear", "fabric"
+    ),
+  },
+  {
+    handle: "kids",
+    children: [
+      {
+        handle: "girls",
+        children: leaves(
+          "girls-frocks", "girls-party-wear-dresses", "kids-lehengas", "girls-t-shirts", "girls-clothing-sets",
+          "kids-skirts-and-shorts", "girls-night-wear", "girls-jacket-sweaters-sweatshirts", "girls-innerwear"
+        ),
+      },
+      {
+        handle: "boys",
+        children: leaves(
+          "kids-shirts", "kids-jeans", "boys-t-shirts", "boys-clothing-sets", "boys-trousers", "boys-shorts",
+          "boys-night-wear", "boys-trackpants-and-joggers", "boys-jacket-sweater-sweatshirts", "boys-innerwear",
+          "boys-swimsuits"
+        ),
+      },
+      ...leaves("infants", "infant-care", "kids-ethnic-wear", "kids-raincoats", "activity-toys", "toys-games"),
+    ],
+  },
+  {
+    handle: "home-essentials",
+    children: [
+      {
+        handle: "bedroom",
+        children: leaves("bedsheets", "bedding-sets", "blankets-quilts-dohars", "pillows-covers", "bed-covers", "mattress-protectors"),
+      },
+      {
+        handle: "living-room",
+        children: leaves("sofa-covers", "diwan-sets", "chair-pads-covers", "door-curtains", "carpets", "doormats", "floor-mats-dhurries"),
+      },
+      {
+        handle: "bath",
+        children: leaves("bath-towels", "hand-face-towels", "towel-sets", "bath-robes", "shower-curtains", "bath-accessories"),
+      },
+      {
+        handle: "kitchen-decor",
+        children: leaves("fridge-covers", "dining-covers", "candles", "wallpapers"),
+      },
+    ],
+  },
+];
+
+/** Path from a top-level category down to `handle` (inclusive), or null if the handle is not in the tree. */
+export function categoryPath(handle: string, nodes: CategoryNode[] = categoryTree): CategoryNode[] | null {
+  for (const node of nodes) {
+    if (node.handle === handle) return [node];
+    const inner = node.children && categoryPath(handle, node.children);
+    if (inner) return [node, ...inner];
+  }
+  return null;
+}
+
 export type NavItem = { href: string; label: string };
 
 // Header navigation, in this order. Collection links use the Shopify collection handle.

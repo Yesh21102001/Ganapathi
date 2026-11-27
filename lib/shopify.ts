@@ -104,6 +104,18 @@ export async function getCollections() {
   return data.collections.nodes;
 }
 
+/** Collections plus the first product's image, so category cards can show a picture even when the collection has none. */
+export async function getCollectionPreviews() {
+  const data = await shopifyFetch<{
+    collections: {
+      nodes: (ShopifyCollection & { products: { nodes: { featuredImage: { url: string } | null }[] } })[];
+    };
+  }>(
+    `query CollectionPreviews { collections(first: 250) { nodes { ${collectionFields} products(first: 1) { nodes { featuredImage { url } } } } } }`
+  );
+  return data.collections.nodes;
+}
+
 export async function getProductByHandle(handle: string) {
   const data = await shopifyFetch<{ product: ShopifyProduct | null }>(
     `query Product($handle: String!) {
