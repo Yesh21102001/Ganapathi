@@ -7,7 +7,8 @@ import KidsSection from "@/components/KidsSection";
 import Reviews from "@/components/Reviews";
 import HelpBand from "@/components/HelpBand";
 import HeroCollage from "@/components/HeroCollage";
-import { collectionImages, homeCollections, priorityHandles, shopByCollection } from "@/lib/site";
+import MarqueeStrip from "@/components/MarqueeStrip";
+import { collectionImages, homeCollections, marqueeMessages, priorityHandles, shopByCollection } from "@/lib/site";
 import type { ShopifyProduct } from "@/types/shopify";
 
 function Section({
@@ -85,6 +86,8 @@ export default async function Home() {
           f: { src: "/images/Elegant Neutral Bedding Stack.png", alt: "Woman wearing an elegant purple saree" },
         }}
       />
+
+      <MarqueeStrip messages={marqueeMessages} />
 
       {nothingLoaded && (
         <div className="mx-auto max-w-3xl px-4 py-16 text-center">

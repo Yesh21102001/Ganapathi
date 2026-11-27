@@ -67,6 +67,10 @@ dialog[open]::backdrop { animation: fade-in 350ms ease-out; }
 .reveal-pending.is-visible[data-reveal="zoom"] { animation-name: zoom-in; }
 @keyframes zoom-in { from { opacity: 0; transform: scale(0.92); } }
 
+/* Endless ticker: the track holds two identical rows, so sliding by half loops seamlessly. */
+@keyframes marquee { to { transform: translateX(-50%); } }
+.marquee-track { animation: marquee 40s linear infinite; }
+
 /* Hero entrance: pieces ease in one after another on load. */
 .hero-in { animation: rise-in 1.4s cubic-bezier(0.16, 1, 0.3, 1) var(--hero-delay, 0ms) backwards; }
 
@@ -84,4 +88,6 @@ dialog[open]::backdrop { animation: fade-in 350ms ease-out; }
 /* Respect users who prefer less motion: hover lifts and zooms become instant. */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { transition-duration: 0.01ms !important; animation-duration: 0.01ms !important; animation-delay: 0s !important; }
+  .marquee-track { animation: none !important; }
+  .marquee-section { overflow-x: auto; }
 }

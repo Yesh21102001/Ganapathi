@@ -144,6 +144,15 @@ export function categoryPath(handle: string, nodes: CategoryNode[] = categoryTre
   return null;
 }
 
+// Scrolling ticker under the home page hero. Replace with real offers (e.g. "Free shipping above Rs. 999") when you have them.
+export const marqueeMessages = [
+  "Sarees & Lehengas",
+  "Men's Shirts & Kurtas",
+  "Kids Wear",
+  "Bedsheets & Home Textiles",
+  "Clothing for the Whole Family",
+];
+
 export type NavItem = { href: string; label: string };
 
 // Header navigation, in this order. Collection links use the Shopify collection handle.
