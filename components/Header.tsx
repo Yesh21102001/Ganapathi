@@ -4,15 +4,30 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
-import { Menu, X } from "lucide-react";
+import { ChevronDown, Menu, X } from "lucide-react";
 import { useEnquiry } from "@/components/EnquiryProvider";
-import { site, type NavItem } from "@/lib/site";
+import { site, type NavGroup, type NavItem } from "@/lib/site";
 
 export default function Header({ nav }: { nav: NavItem[] }) {
   const [openPath, setOpenPath] = useState<string | null>(null);
   const pathname = usePathname();
   const openEnquiry = useEnquiry();
   const open = openPath === pathname; // closes automatically on navigation
+
+  // Desktop dropdown (hover or keyboard focus) and mobile sub-menu; both close on navigation.
+  const [hover, setHover] = useState<{ key: string; path: string } | null>(null);
+  const hovered = hover && hover.path === pathname ? hover.key : null;
+  const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const cancelClose = () => {
+    if (closeTimer.current) clearTimeout(closeTimer.current);
+  };
+  // Small grace period on leave, so crossing the gap between link and panel never makes it flicker shut.
+  const scheduleClose = () => {
+    cancelClose();
+    closeTimer.current = setTimeout(() => setHover(null), 200);
+  };
+  useEffect(() => cancelClose, []);
+  const [expandedMobile, setExpandedMobile] = useState<string | null>(null);
 
   // Smart sticky: hide while scrolling down, reveal on any scroll up.
   const [hidden, setHidden] = useState(false);
@@ -66,19 +81,63 @@ export default function Header({ nav }: { nav: NavItem[] }) {
           <Image src="/logo.png" alt={site.name} width={56} height={56} priority className="-my-2 -ml-2 h-14 w-14" />
         </Link>
 
-        <nav aria-label="Main navigation" className="hidden items-center gap-9 lg:flex">
-          {nav.map((item) => (
-            <Link
-              key={item.href}
-              href={item.href}
-              aria-current={isActive(item.href) ? "page" : undefined}
-              className={`text-sm transition-colors hover:text-[#7B1E2B] ${
-                isActive(item.href) ? "text-[#7B1E2B]" : "text-[#2A1A14]"
-              }`}
-            >
-              {item.label}
-            </Link>
-          ))}
+        <nav aria-label="Main navigation" className="hidden h-full items-stretch gap-9 lg:flex">
+          {nav.map((item) => {
+            const active = isActive(item.href);
+            const hasMenu = Boolean(item.groups?.length);
+            const showMenu = hasMenu && hovered === item.href;
+            const enter = () => {
+              cancelClose();
+              setHover({ key: item.href, path: pathname });
+            };
+            return (
+              <div
+                key={item.href}
+                className="flex items-center"
+                onMouseEnter={enter}
+                onMouseLeave={scheduleClose}
+                onFocus={enter}
+                onBlur={(e) => {
+                  if (!e.currentTarget.contains(e.relatedTarget)) setHover(null);
+                }}
+              >
+                <Link
+                  href={item.href}
+                  aria-current={active ? "page" : undefined}
+                  aria-haspopup={hasMenu ? "true" : undefined}
+                  aria-expanded={hasMenu ? showMenu : undefined}
+                  className={`flex items-center gap-1 text-sm transition-colors hover:text-[#7B1E2B] ${
+                    active || showMenu ? "text-[#7B1E2B]" : "text-[#2A1A14]"
+                  }`}
+                >
+                  {item.label}
+                  {hasMenu && (
+                    <ChevronDown
+                      size={14}
+                      aria-hidden="true"
+                      className={`transition-transform duration-500 ${showMenu ? "rotate-180" : ""}`}
+                    />
+                  )}
+                </Link>
+
+                {hasMenu && (
+                  <div
+                    className={`absolute inset-x-0 top-full border-b border-[#2A1A14]/10 bg-[#FBF7F1] shadow-lg shadow-[#2A1A14]/10 ${
+                      showMenu
+                        ? "visible translate-y-0 opacity-100 transition-[opacity,transform] duration-500"
+                        : "pointer-events-none invisible -translate-y-2 opacity-0 transition-[opacity,transform,visibility] duration-300 [transition-delay:0s,0s,300ms]"
+                    }`}
+                  >
+                    <div className="mx-auto grid max-w-7xl gap-x-10 gap-y-6 px-8 py-8 [grid-template-columns:repeat(auto-fit,minmax(170px,1fr))]">
+                      {item.groups!.map((g, i) => (
+                        <MenuColumn key={g.label ?? `g${i}`} group={g} index={i} show={showMenu} />
+                      ))}
+                    </div>
+                  </div>
+                )}
+              </div>
+            );
+          })}
         </nav>
 
         <div className="flex items-center gap-1 text-[#2A1A14]">
@@ -113,17 +172,50 @@ export default function Header({ nav }: { nav: NavItem[] }) {
         inert={!open}
         className={`min-h-0 overflow-hidden px-4 ${open ? "border-t border-[#2A1A14]/10 pb-4 pt-2" : ""}`}
       >
-        {nav.map((item) => (
-          <Link
-            key={item.href}
-            href={item.href}
-            className={`block rounded-sm px-3 py-3 text-sm ${
-              isActive(item.href) ? "bg-[#7B1E2B]/10 text-[#7B1E2B]" : "text-[#2A1A14]"
-            }`}
-          >
-            {item.label}
-          </Link>
-        ))}
+        {nav.map((item) => {
+          const hasMenu = Boolean(item.groups?.length);
+          const expanded = expandedMobile === item.href;
+          return (
+            <div key={item.href}>
+              <div className="flex items-center">
+                <Link
+                  href={item.href}
+                  className={`block flex-1 rounded-sm px-3 py-3 text-sm ${
+                    isActive(item.href) ? "bg-[#7B1E2B]/10 text-[#7B1E2B]" : "text-[#2A1A14]"
+                  }`}
+                >
+                  {item.label}
+                </Link>
+                {hasMenu && (
+                  <button
+                    type="button"
+                    aria-label={`${expanded ? "Hide" : "Show"} ${item.label} categories`}
+                    aria-expanded={expanded}
+                    onClick={() => setExpandedMobile(expanded ? null : item.href)}
+                    className="rounded-full p-3 text-[#2A1A14]"
+                  >
+                    <ChevronDown size={18} className={`transition-transform duration-500 ${expanded ? "rotate-180" : ""}`} />
+                  </button>
+                )}
+              </div>
+              {hasMenu && (
+                <div
+                  className={`grid transition-[grid-template-rows] duration-500 ${
+                    expanded ? "grid-rows-[1fr]" : "grid-rows-[0fr]"
+                  }`}
+                >
+                  <div inert={!expanded} className="min-h-0 overflow-hidden">
+                    <div className="space-y-4 border-l border-[#2A1A14]/10 pb-3 pl-4 pt-1 ml-3">
+                      {item.groups!.map((g, i) => (
+                        <MenuColumn key={g.label ?? `g${i}`} group={g} compact />
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              )}
+            </div>
+          );
+        })}
         <button
           type="button"
           onClick={() => {
@@ -137,5 +229,49 @@ export default function Header({ nav }: { nav: NavItem[] }) {
       </nav>
       </div>
     </header>
+  );
+}
+
+/** One dropdown column: heading (a link to the whole group) over its sub-category links. */
+function MenuColumn({
+  group,
+  compact = false,
+  index = 0,
+  show = true,
+}: {
+  group: NavGroup;
+  compact?: boolean;
+  index?: number;
+  show?: boolean; // desktop dropdown only: columns fade in one after another
+}) {
+  return (
+    <div
+      className={compact ? undefined : `transition-[opacity,transform] duration-700 ${show ? "translate-y-0 opacity-100" : "-translate-y-1 opacity-0"}`}
+      style={compact ? undefined : { transitionDelay: show ? `${80 + index * 70}ms` : "0ms" }}
+    >
+      {group.label &&
+        (group.href ? (
+          <Link
+            href={group.href}
+            className="font-serif text-lg font-semibold text-[#7B1E2B] transition-colors hover:text-[#611722]"
+          >
+            {group.label}
+          </Link>
+        ) : (
+          <p className="font-serif text-lg font-semibold text-[#2A1A14]">{group.label}</p>
+        ))}
+      <ul className={`${group.label ? "mt-2" : ""} ${compact ? "space-y-1" : "space-y-2"}`}>
+        {group.links.map((l) => (
+          <li key={l.href}>
+            <Link
+              href={l.href}
+              className={`block text-sm text-[#2A1A14] transition-[color,transform] duration-300 hover:translate-x-1 hover:text-[#7B1E2B] ${compact ? "py-1.5" : ""}`}
+            >
+              {l.label}
+            </Link>
+          </li>
+        ))}
+      </ul>
+    </div>
   );
 }

@@ -153,17 +153,45 @@ export const marqueeMessages = [
   "Clothing for the Whole Family",
 ];
 
-export type NavItem = { href: string; label: string };
+export type NavLink = { label: string; href: string };
+/** A column in a header dropdown: an optional heading (itself a link) over a list of links. */
+export type NavGroup = { label?: string; href?: string; links: NavLink[] };
+export type NavItem = { href: string; label: string; groups?: NavGroup[] };
 
-// Header navigation, in this order. Collection links use the Shopify collection handle.
-export function buildNav(): NavItem[] {
+// Header navigation, in this order. `titles` maps collection handle -> title (from Shopify),
+// used to label the dropdown links built from `categoryTree`.
+export function buildNav(titles: Map<string, string>): NavItem[] {
+  const link = (handle: string): NavLink[] => {
+    const label = titles.get(handle);
+    return label ? [{ label, href: `/collections/${handle}` }] : [];
+  };
+  const dropdown = (handle: string): NavGroup[] => {
+    const node = categoryTree.find((n) => n.handle === handle);
+    const children = node?.children ?? [];
+    const nested = children.filter((c) => c.children);
+    const plain = children.filter((c) => !c.children).flatMap((c) => link(c.handle));
+    const groups: NavGroup[] = [];
+    // Groups with their own sub-categories first, loose links last.
+    for (const c of nested) {
+      const links = c.children!.flatMap((g) => link(g.handle));
+      if (links.length) groups.push({ label: titles.get(c.handle), href: `/collections/${c.handle}`, links });
+    }
+    if (plain.length) groups.push({ label: nested.length ? "More" : undefined, links: plain });
+    return groups;
+  };
+  const top = (handle: string, label: string): NavItem => ({
+    href: `/collections/${handle}`,
+    label,
+    groups: dropdown(handle),
+  });
+
   return [
     { href: "/", label: "Home" },
     { href: "/collections/new-arrivals", label: "New Arrivals" },
-    { href: "/collections/women", label: "Women" },
-    { href: "/collections/men", label: "Men" },
-    { href: "/collections/kids", label: "Kids" },
-    { href: "/collections/home-essentials", label: "Home Essentials" },
+    top("women", "Women"),
+    top("men", "Men"),
+    top("kids", "Kids"),
+    top("home-essentials", "Home Essentials"),
   ];
 }
 

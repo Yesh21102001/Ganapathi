@@ -75,7 +75,7 @@ export default async function Home() {
     <>
       {/* HERO */}
       <HeroCollage
-        title="Clothing and Home Textiles for the Whole Family"
+        title={"Clothing and Home Textiles\nfor the Whole Family"}
         images={{
           a: { src: "/images/Contemplative Teal Shirt Portrait.png", alt: "Woman wearing an elegant purple saree" },
           b: { src: "/images/Burnt Orange Geometric Bedding in a Sunlit Bedroom.png", alt: "Burnt orange geometric bedding" },

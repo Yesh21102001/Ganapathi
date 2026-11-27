@@ -55,8 +55,10 @@ export default function HeroCollage({
   return (
     <section className="bg-[#FCF8F3]">
       <div className="mx-auto max-w-7xl px-4 pb-12 pt-10 sm:px-6 md:pt-14 lg:px-8 lg:pb-16">
-        <h1 style={{ "--hero-delay": "100ms" } as React.CSSProperties} className="hero-in mx-auto max-w-3xl text-balance text-center font-serif text-4xl font-medium leading-[1.1] text-[#2A1A14] sm:text-5xl lg:text-6xl">
-          {title}
+        <h1 style={{ "--hero-delay": "100ms" } as React.CSSProperties} className="hero-in mx-auto max-w-5xl text-balance text-center font-serif text-3xl font-medium leading-[1.15] text-[#2A1A14] sm:text-4xl lg:text-5xl">
+          {title.split("\n").map((line, i) => (
+            <span key={i} className="block">{line}</span>
+          ))}
         </h1>
 
         <div style={{ "--hero-delay": "350ms" } as React.CSSProperties} className="hero-in mt-6 flex justify-center">

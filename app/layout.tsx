@@ -3,7 +3,7 @@ import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import AnnouncementBar from "@/components/AnnouncementBar";
-import { Jost, Cormorant_Garamond } from "next/font/google";
+import { Jost, Martel } from "next/font/google";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import MobileTabBar from "@/components/MobileTabBar";
 import ScrollReveal from "@/components/ScrollReveal";
@@ -12,11 +12,13 @@ import { getCollections, safe } from "@/lib/shopify";
 import { buildNav, site } from "@/lib/site";
 
 const jost = Jost({ subsets: ["latin"], variable: "--font-jost" });
-const cormorant = Cormorant_Garamond({
+const martel = Martel({
   subsets: ["latin"],
-  weight: ["500", "600"],
-  variable: "--font-cormorant",
+  weight: ["400", "600", "700"],
+  variable: "--font-martel",
 });
+
+
 
 export const metadata: Metadata = {
   title: { default: site.name, template: `%s | ${site.name}` },
@@ -31,10 +33,10 @@ export default async function RootLayout({
 
   return (
     <html lang="en">
-      <body className={`${jost.variable} ${cormorant.variable} pb-16 font-sans antialiased md:pb-0`}>
+      <body className={`${jost.variable} ${martel.variable} pb-16 font-sans antialiased md:pb-0`}>
         <EnquiryProvider>
           <AnnouncementBar messages={site.announcements} href={`https://wa.me/${site.whatsapp}`} />
-          <Header nav={buildNav()} />
+          <Header nav={buildNav(new Map(collections.map((c) => [c.handle, c.title])))} />
           <main id="main">{children}</main>
           <Footer collections={collections} />
           <WhatsAppButton />
