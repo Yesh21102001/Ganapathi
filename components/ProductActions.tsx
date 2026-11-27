@@ -20,12 +20,13 @@ export default function ProductActions({
   inStock: boolean;
   whatsapp: string;
 }) {
-  // Single-value options (e.g. only one size) are pre-selected.
+  // Every option starts with its first available value selected (e.g. the first size).
   const [chosen, setChosen] = useState<Record<string, string>>(() =>
     Object.fromEntries(
-      options
-        .filter((o) => o.values.length === 1 && !o.soldOut.includes(o.values[0]))
-        .map((o) => [o.name, o.values[0]])
+      options.flatMap((o) => {
+        const first = o.values.find((v) => !o.soldOut.includes(v));
+        return first ? [[o.name, first]] : [];
+      })
     )
   );
 
