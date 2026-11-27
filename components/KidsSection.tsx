@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
+import { ArrowRight } from "lucide-react";
 import { kids, kidsBrands, kidsImages } from "@/lib/site";
 import { placeholderColors } from "@/components/CategoryCard";
 
@@ -18,30 +19,38 @@ export default function KidsSection({
         <h2 data-reveal="fade" className="font-serif text-3xl font-medium text-[#2A1A14] sm:text-4xl">For kids</h2>
 
         <ul className="mt-8 grid grid-cols-2 gap-3 sm:gap-5 lg:grid-cols-4">
-          {items.map((k, i) => (
-            <li key={k.handle} data-reveal="slide">
-              <Link
-                href={`/collections/${k.handle}`}
-                className="flex h-full flex-col gap-3 rounded-sm border border-[#EADFD2] bg-white p-2.5 transition duration-700 hover:-translate-y-0.5 hover:shadow-md sm:flex-row sm:items-center sm:gap-5 sm:p-3.5"
-              >
-                <div
-                  className="relative aspect-square w-full shrink-0 overflow-hidden rounded-sm sm:h-24 sm:w-24"
+          {items.map((k, i) => {
+            const src = kidsImages[k.handle] ?? byHandle.get(k.handle)?.image?.url;
+            return (
+              <li key={k.handle} data-reveal="slide">
+                <Link
+                  href={`/collections/${k.handle}`}
+                  className="group relative block aspect-[3/4] overflow-hidden rounded-sm transition duration-700 hover:-translate-y-1 hover:shadow-xl"
                   style={{ backgroundColor: placeholderColors[i % placeholderColors.length] }}
                 >
-                  {(kidsImages[k.handle] ?? byHandle.get(k.handle)?.image?.url) && (
+                  {src && (
                     <Image
-                      src={(kidsImages[k.handle] ?? byHandle.get(k.handle)?.image?.url)!}
+                      src={src}
                       alt={k.label}
                       fill
-                      sizes="(min-width: 640px) 96px, 50vw"
-                      className="object-cover object-top"
+                      sizes="(min-width: 1024px) 25vw, 50vw"
+                      className="object-cover object-top transition duration-[1400ms] group-hover:scale-105"
                     />
                   )}
-                </div>
-                <h3 className="px-0.5 font-serif text-lg font-medium leading-tight text-[#2A1A14] sm:px-0 sm:text-2xl">{k.label}</h3>
-              </Link>
-            </li>
-          ))}
+                  <div
+                    aria-hidden="true"
+                    className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-[#2A1A14]/75 to-transparent"
+                  />
+                  <div className="absolute inset-x-0 bottom-0 flex items-center justify-between gap-2 p-4 text-white sm:p-5">
+                    <h3 className="font-serif text-xl font-medium leading-tight sm:text-2xl">{k.label}</h3>
+                    <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-white/90 text-[#2A1A14] transition duration-500 group-hover:translate-x-1 group-hover:bg-white">
+                      <ArrowRight size={16} aria-hidden="true" />
+                    </span>
+                  </div>
+                </Link>
+              </li>
+            );
+          })}
         </ul>
 
         <div data-reveal="fade" className="mt-10 flex flex-wrap items-center gap-x-8 gap-y-3 border-t border-[#EADFD2] pt-8">
