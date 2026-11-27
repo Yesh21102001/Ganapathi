@@ -35,7 +35,7 @@ function Section({
           {products.slice(0, 8).map((product, i) => (
             <div
               key={product.id}
-              data-reveal="slide"
+              data-reveal="zoom"
               className={`w-[calc((100%-1rem)/1.5)] shrink-0 snap-start sm:w-[calc((100%-2rem)/3.3)] lg:w-auto ${
                 i >= 4 ? "lg:hidden" : ""
               }`}

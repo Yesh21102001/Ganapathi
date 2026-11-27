@@ -22,7 +22,7 @@ export default function KidsSection({
           {items.map((k, i) => {
             const src = kidsImages[k.handle] ?? byHandle.get(k.handle)?.image?.url;
             return (
-              <li key={k.handle} data-reveal="slide">
+              <li key={k.handle} data-reveal="zoom">
                 <Link
                   href={`/collections/${k.handle}`}
                   className="group relative block aspect-[3/4] overflow-hidden rounded-sm transition duration-700 hover:-translate-y-1 hover:shadow-xl"

@@ -41,7 +41,7 @@ export default function AboutPage() {
 
       {/* Who we are */}
       <section className="mx-auto grid max-w-7xl items-center gap-10 px-4 py-14 sm:px-6 lg:grid-cols-2 lg:gap-16 lg:px-8 lg:py-20">
-        <div className="relative aspect-[4/5] overflow-hidden rounded-sm bg-[#EADBC8]">
+        <div data-reveal="zoom" className="relative aspect-[4/5] overflow-hidden rounded-sm bg-[#EADBC8]">
           <Image
             src="/images/Elegant Purple Saree Portrait.png"
             alt="Saree from the Ganapati Vastram range"
@@ -96,7 +96,7 @@ export default function AboutPage() {
           </div>
           <div className="mt-10 grid grid-cols-2 gap-4 lg:grid-cols-4 lg:gap-6">
             {categories.map((c) => (
-              <Link key={c.title} href={c.href} className="group block">
+              <Link key={c.title} href={c.href} data-reveal="zoom" className="group block">
                 <div className="relative aspect-[4/5] overflow-hidden rounded-sm bg-[#EADBC8]">
                   <Image
                     src={c.img}
