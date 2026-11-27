@@ -1,11 +1,10 @@
 "use client";
 
 import { useState } from "react";
-import Link from "next/link";
 import CategoryCard from "@/components/CategoryCard";
 
 export type TabItem = { handle: string; title: string; imageUrl: string | null };
-export type TabGroup = { title?: string; href?: string; items: TabItem[] };
+export type TabGroup = { title?: string; items: TabItem[] };
 export type Tab = { handle: string; title: string; groups: TabGroup[] };
 
 /** Category tabs: picking a tab shows that category's sub-categories right on the page. */
@@ -54,13 +53,8 @@ export default function CollectionTabs({ tabs }: { tabs: Tab[] }) {
         {current.groups.map((g, gi) => (
           <section key={g.title ?? `group-${gi}`}>
             {g.title && (
-              <div className="mb-5 flex items-end justify-between gap-4">
+              <div className="mb-5">
                 <h2 className="font-serif text-3xl font-medium text-[#2A1A14]">{g.title}</h2>
-                {g.href && (
-                  <Link href={g.href} className="shrink-0 text-sm font-medium text-[#7B1E2B] hover:underline">
-                    View all
-                  </Link>
-                )}
               </div>
             )}
             <div className="grid grid-cols-2 gap-3 sm:gap-5 lg:grid-cols-4">

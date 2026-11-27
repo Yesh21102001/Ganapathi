@@ -34,7 +34,6 @@ export default async function CollectionsPage() {
       if (inner.length) {
         groups.push({
           title: byHandle.get(child.handle)?.title ?? child.handle,
-          href: `/collections/${child.handle}`,
           items: inner,
         });
       }

@@ -69,23 +69,26 @@ export type CategoryNode = { handle: string; children?: CategoryNode[] };
 const leaves = (...handles: string[]): CategoryNode[] => handles.map((handle) => ({ handle }));
 
 export const categoryTree: CategoryNode[] = [
+  // Women and Men follow the store's own main menu in Shopify.
   {
     handle: "women",
-    children: leaves(
-      "sarees", "lehengas", "kurta-sets", "kurtas", "dresses", "tops", "women-t-shirts", "western-wear",
-      "traditional-wear", "dupattas", "readymade-blouses", "leggings", "plazzos", "women-jeans",
-      "women-sweaters", "women-shorts", "women-nightwear", "lingerie-nightwear", "bras", "petticoats",
-      "south-indian-dress", "unstitched-dress-material", "unstitched-blouse-pieces"
-    ),
+    children: [
+      { handle: "traditional-wear", children: leaves("sarees", "lehengas", "readymade-blouses", "dupattas", "kurta-sets", "leggings", "plazzos") },
+      { handle: "western-wear", children: leaves("dresses", "tops", "women-jeans", "women-t-shirts", "women-sweaters", "frocks") },
+      { handle: "lingerie-nightwear", children: leaves("women-nightwear", "women-shorts", "bras", "petticoats", "briefs") },
+      { handle: "clothing-materials", children: leaves("unstitched-dress-material", "unstitched-blouse-pieces") },
+      { handle: "accessories", children: leaves("handbags") },
+    ],
   },
   {
     handle: "men",
-    children: leaves(
-      "t-shirts", "casual-shirts", "formal-shirts", "ramraj-shirts", "jeans", "casual-trousers",
-      "formal-trousers", "track-pants-joggers", "mens-shorts", "sweatshirts-sweaters", "jacketsdenim-rain",
-      "traditional-wear-1", "dhotis", "sleepwear", "vests", "briefs-trunks", "boxers", "briefs",
-      "mens-active-t-shirts", "mens-swimwear", "fabric"
-    ),
+    children: [
+      { handle: "top-wear", children: leaves("t-shirts", "casual-shirts", "formal-shirts", "ramraj-shirts", "sweatshirts-sweaters", "jacketsdenim-rain") },
+      { handle: "bottom-wear", children: leaves("jeans", "casual-trousers", "formal-trousers", "track-pants-joggers", "mens-shorts") },
+      { handle: "traditional-wear-1", children: leaves("kurtas", "dhotis", "south-indian-dress") },
+      { handle: "innerwear-sleepwear", children: leaves("briefs-trunks", "boxers", "vests", "sleepwear") },
+      { handle: "sports-accessories", children: leaves("mens-active-t-shirts", "mens-swimwear", "socks", "caps", "fabric") },
+    ],
   },
   {
     handle: "kids",
